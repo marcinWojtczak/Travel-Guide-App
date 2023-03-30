@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer base {
+  h1 {
+    @apply text-4xl lg:text-6xl  
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl 
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl 
+  }
+
+  h4 {
+    @apply text-xl sm:text-2xl 
+  }
+
+  p {
+    @apply text-[14px] sm:text-[16px]
+  }
+
+  li {
+    @apply cursor-pointer list-none text-[18px] sm:text-[20px]
+  }
+}
