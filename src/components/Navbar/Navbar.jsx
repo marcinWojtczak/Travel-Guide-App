@@ -7,29 +7,27 @@ const Navbar = () => {
 
   const [toggleBtn, setToggleBtn] = useState(true)
 
-  console.log(toggleBtn)
-
   const handleNav = () => {
     setToggleBtn(toggleBtn => !toggleBtn)
     
   }
 
   return (
-    <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 mp-10 lg:px-14">
+    <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 lg:px-14">
       <div className="flex justify-evenly cursor-pointer gap-2">
         <a href="/"><h2><SiYourtraveldottv /></h2></a> 
         <h2 className='font-bold'>Travel Places</h2>
       </div>
 
       <div className="max-lg:hidden">
-        <ul className="flex justify-evenly gap-12">
-          <li>
+        <ul className="flex justify-evenly items-center gap-12">
+          <li className='font-semibold'>
             <a href="/">Home</a>
           </li>
-          <li>
+          <li className='font-semibold'>
             <a href="/">Destinations</a>
           </li>
-          <li>
+          <li className='font-semibold'>
             <a href="/">Most Popular Places To Visit</a>
           </li>
         </ul>
@@ -39,26 +37,26 @@ const Navbar = () => {
       </div>
   
       <div className={!toggleBtn 
-      ? "w-[50%] min-w-[350px] h-screen bg-[red] fixed top-0 right-0 flex flex-col items-start    justify-start pt-8 px-10 opacity-700 gap-16 lg:hidden ease-in-out duration-500"
-      : "w-[50%] min-w-[350px] h-screen bg-[red] fixed top-0 right-[-100%] flex flex-col items-start justify-start pt-8 px-10 opacity-700 gap-16 lg:hidden ease-in-out duration-500"
+      ? "w-[50%] min-w-[350px] h-screen bg-gradient-to-bl from-[#005F73]  to-[#0A9396] fixed top-0 right-0 flex flex-col items-start justify-start pt-8 px-10  gap-16 lg:hidden ease-in-out duration-500 opacity-90"
+      : "w-[50%] min-w-[350px] h-screen bg-gradient-to-bl from-[#005F73]  to-[#0A9396] fixed top-0 right-[-100%] flex flex-col items-start justify-start pt-8 px-10 gap-16 lg:hidden ease-in-out duration-500"
       }>
         <div onClick={handleNav}>
-          <h2><RiCloseLine /></h2>
+          <h2 className='text-[#001219] font-bold'><RiCloseLine /></h2>
         </div>
         <ul>
           <li className='py-4'>
-            <h3><a href="/">Home</a></h3>
+            <h3 className='text-[#001219] font-bold'><a href="/">Home</a></h3>
           </li>
           <li className='py-4'>
-            <h3><a href="/">Destinations</a></h3>
+            <h3 className='text-[#001219] font-bold'><a href="/">Destinations</a></h3>
           </li>
           <li className='py-4'>
-            <h3><a href="/">Most Popular Places To Visit</a></h3>
+            <h3 className='text-[#001219] font-bold'><a href="/">Most Popular Places To Visit</a></h3>
           </li>
         </ul>
         <div className='flex gap-4 fixed bottom-6'>
-          <h2><SiInstagram /></h2>
-          <h2><SiFacebook /></h2>
+          <h2 className='text-[#001219] font-bold'><SiInstagram /></h2>
+          <h2 className='text-[#001219] font-bold'><SiFacebook /></h2>
         </div>  
       </div>
     </nav>
