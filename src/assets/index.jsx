@@ -5,3 +5,8 @@ export { default as hawaii } from "./img/hawaii.jpg";
 export { default as greece } from "./img/greece.jpg";
 export { default as canyon } from "./img/canyon.jpg";
 export { default as river } from "./img/river.jpg";
+export { default as sanFrancisco } from "./img/sanFrancisco.jpg";
+export { default as island } from "./img/island.jpg";
+export { default as barcelona } from "./img/barcelona.jpg";
+export { default as peru } from "./img/peru.jpg";
+export { default as warsaw } from "./img/warsaw.jpg";

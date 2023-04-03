@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 lg:px-14">
+    <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 lg:px-14 bg-[white]">
       <div className="flex justify-evenly cursor-pointer gap-2">
         <a href="/"><h2><SiYourtraveldottv /></h2></a> 
         <h2 className='font-bold'>Travel Places</h2>
