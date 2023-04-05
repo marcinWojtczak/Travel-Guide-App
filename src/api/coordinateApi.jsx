@@ -18,3 +18,4 @@ export const getDestinationCoordinates = async (destination, distance) => {
     console.error(error);
   }
 };
+

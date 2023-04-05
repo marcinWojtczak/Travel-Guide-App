@@ -1,30 +1,11 @@
-import React, { useState } from 'react';
 import { greece, river, mountains2, barcelona, canyon, sanFrancisco, island, peru } from '../../assets/index';
 import Navbar from '../Navbar/Navbar';
-import { useGetCoordinatesQuery } from '../../services/coordinatesApi';
-import { getDestinationCoordinates } from '../../api/index'
 
 
-const Main = () => {
-  //Coordinates
-  const [coordinates, setCoordinates] = useState(null)
-  console.log(coordinates)
 
-  const { data ,isLoading, isError } = useGetCoordinatesQuery(coordinates)
-  console.log(data)
 
-  const [destination, setDestination] = useState('')
+const Main = ({setDestination, handleSubmit}) => {
   
-  //distance in km to calculate the bounding box
-  const distance = 10
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const {tr_latitude, tr_longitude, bl_latitude, bl_longitude } = await getDestinationCoordinates(destination,distance)
-    setCoordinates({tr_latitude, tr_longitude, bl_latitude, bl_longitude })
-  } 
-  
-
   return (
     <>
       <Navbar />
@@ -39,15 +20,8 @@ const Main = () => {
             >
             </input>
           </form>
-
-          <div>
-            <button className='bg-[red] p-4'>Search</button>
-          </div>
-        
         </div>
       </div>
-        
-      
     </>
   )
 }
