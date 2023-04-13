@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import PlacesList from '../PlacesList/PlacesList';
 import { ImLocation2 } from 'react-icons/im'
@@ -15,6 +15,8 @@ const Map = ({coordinates, setCoordinates, setBounds, places}) => {
   const bl_longitude = parseFloat(coordinates.bl_longitude);
   const coordinatesObj = {tr_latitude, tr_longitude, bl_latitude, bl_longitude};
   // console.log(coordinatesObj);
+
+  
   
   return (
     <div className='h-screen w-full flex gap-8 p-16 max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4'>
@@ -37,15 +39,16 @@ const Map = ({coordinates, setCoordinates, setBounds, places}) => {
         >
           {places?.data?.map((place, index) => (
             <div 
-              className='flex'
+              className='w-[150px] h-[150px] bg-white border-2 text-center p-2'
               lat={Number(place.latitude)}
               lng={Number(place.longitude)}
               key={index}
             >
-              <p className='font-semibold py-2'>{place.name}</p>
-              <div>
-                <ImLocation2 className='text-3xl text-red-600'/>
-              </div>
+              <p className='font-semibold'>{place.name}</p>
+              <img
+                className='w-full h-[100px] z-10'
+                src={place?.photo ? place.photo.images?.large?.url : ''} 
+                alt={place.name}/>
             </div>
           ))}
         </GoogleMapReact>

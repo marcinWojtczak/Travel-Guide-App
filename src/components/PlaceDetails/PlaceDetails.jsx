@@ -1,24 +1,19 @@
 import React from 'react';
 import { BsFillTelephoneFill, BsGlobe } from "react-icons/bs";
 
-import StarRatingComponent from 'react-star-rating-component';
+
 
 
 const PlaceDetails = ({ place }) => {
-  console.log(place)
+  
   return (
     <div className='flex flex-col gap-4'>
       <img src={place?.photo ? place.photo.images?.large?.url : ''} />
       <div className='px-2 mb-4 flex flex-col gap-3'>
         <h4 className='font-bold'>{place.name}</h4>
-        <div className='flex '>
+        <div className='flex justify-between'>
           <p>Rating: </p>
-          <StarRatingComponent
-            starCount={5}
-            value={parseFloat(place?.rating)}
-            name='rating'
-          />
-          <p>({place.num_reviews})</p>
+          <p>{place?.rating} ({place.num_reviews})</p>
         </div>
         <div className='flex justify-between'>
           <p>Ranking: </p>
@@ -36,8 +31,8 @@ const PlaceDetails = ({ place }) => {
           ))}
         </div>
         <div className='flex items-center'>
-          <a className='underline underline-offset-2 mr-10 text-blue-900' href={place?.web_url}><BsGlobe className='inline mr-1 '/>Trip Advisor Website</a>
-          <a className='underline underline-offset-2 text-blue-900' href={place?.website}> Website</a>
+          <a className='underline underline-offset-2 mr-10 text-blue-900' target='_blank' href={place?.web_url}><BsGlobe className='inline mr-1 '/>Trip Advisor Website</a>
+          <a className='underline underline-offset-2 text-blue-900' target='_blank' href={place?.website}> Website</a>
         </div>
       </div>
     </div>

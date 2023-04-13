@@ -2,20 +2,9 @@ import React, {useState} from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 
 const PlacesList = ({ places }) => {
-  console.log(places)
+  
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
-  // const places = [
-  //   {name: 'Cool Place'},
-  //   {name: 'Best Bear'},
-  //   {name: 'Best Steak'},
-  //   {name: 'Cool Place'},
-  //   {name: 'Best Bear'},
-  //   {name: 'Best Steak'},
-  //   {name: 'Cool Place'},
-  //   {name: 'Best Bear'},
-  //   {name: 'Best Steak'},
-  // ]
 
   return (
     <div className='h-full'>
