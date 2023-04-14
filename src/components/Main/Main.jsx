@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 
 
 
-const Main = ({setDestination, handleSubmit}) => {
+const Main = ({ setDestination, handleSubmit }) => {
   
   return (
     <>
