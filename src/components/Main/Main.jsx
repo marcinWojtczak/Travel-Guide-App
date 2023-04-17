@@ -1,9 +1,6 @@
 import { greece, river, mountains2, barcelona, canyon, sanFrancisco, island, peru } from '../../assets/index';
 import Navbar from '../Navbar/Navbar';
 
-
-
-
 const Main = ({ setDestination, handleSubmit }) => {
   
   return (

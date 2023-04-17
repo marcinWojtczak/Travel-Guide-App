@@ -14,10 +14,7 @@ const Map = ({coordinates, setCoordinates, setBounds, places}) => {
   const bl_latitude = parseFloat(coordinates.bl_latitude);
   const bl_longitude = parseFloat(coordinates.bl_longitude);
   const coordinatesObj = {tr_latitude, tr_longitude, bl_latitude, bl_longitude};
-  // console.log(coordinatesObj);
 
-  
-  
   return (
     <div className='h-screen w-full flex gap-8 p-16 max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4'>
       <div className='w-[40%] max-lg:w-full'>

@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { getWeatherData } from '../../api/openWeatherApi';
+import { getWeatherData, getDailyWeather } from '../../api/openWeatherApi';
 import { GoLocation } from 'react-icons/go';
 import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';
-import Forecast from '../Forecast/Forecast';
-
-
-
 
 
 const Weather = ({ coordinates }) => {
-
-  const [weatherData, setWeatherData] = useState()
-  console.log(weatherData)
+  const [date, setDate] = useState(new Date())
 
   useEffect(() => {
-    getWeatherData(coordinates)
-      .then((data) => {
-        setWeatherData(data)
-      })
+    setInterval(() => {
+      const date = new Date();
+      setDate(date.toLocaleString())
+    }, 1000)
   }, [])
 
   return (
-    <div className='w-full bg-sky-600 px-8 text-[white]'>
-      <div className='flex justify-center py-8 font-extralight tracking-wide'>
-        <p>Friday, 14.04.2023 | Local time: 8:38 AM</p>
+    <div className='flex flex-col w-full bg-sky-600 p-8 text-[white] gap-10'>
+      <div className='flex justify-center font-extralight tracking-wide'>
+        <p>{date.toLocaleString()}</p>
       </div>
       <div className='flex justify-center gap-8'>
         <div className='flex items-center gap-1'>
@@ -40,8 +34,7 @@ const Weather = ({ coordinates }) => {
           </button>
         </div>
       </div>
-      <TemperatureAndDetails />
-      <Forecast />
+      <TemperatureAndDetails coordinates={coordinates}/>
     </div>
   )
 }

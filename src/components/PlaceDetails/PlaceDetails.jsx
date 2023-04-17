@@ -2,8 +2,6 @@ import React from 'react';
 import { BsFillTelephoneFill, BsGlobe } from "react-icons/bs";
 
 
-
-
 const PlaceDetails = ({ place }) => {
   
   return (
