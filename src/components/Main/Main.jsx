@@ -1,7 +1,8 @@
 import { greece, river, mountains2, barcelona, canyon, sanFrancisco, island, peru } from '../../assets/index';
 import Navbar from '../Navbar/Navbar';
 
-const Main = ({ setDestination, handleSubmit }) => {
+
+const Main = ({ setInputData, handleSubmit }) => {
   
   return (
     <>
@@ -13,9 +14,10 @@ const Main = ({ setDestination, handleSubmit }) => {
             <input className='w-full h-16 border-0 outline-none rounded-3xl pl-8 text-[black]   'placeholder='Search destination'
             type='text'
             name='destination'
-            onChange={(e) => setDestination(e.target.value)}
+            onChange={(e) => setInputData(e.target.value)}
             >
             </input>
+            <button type='submit'></button>
           </form>
         </div>
       </div>

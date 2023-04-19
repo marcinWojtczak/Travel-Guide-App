@@ -4,7 +4,7 @@ import { GoLocation } from 'react-icons/go';
 import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';
 
 
-const Weather = ({ coordinates }) => {
+const Weather = ({ searchingData, coordinates }) => {
   const [date, setDate] = useState(new Date())
 
   useEffect(() => {
@@ -22,7 +22,9 @@ const Weather = ({ coordinates }) => {
       <div className='flex justify-center gap-8'>
         <div className='flex items-center gap-1'>
           <GoLocation size={20}/>
-          <h4>Warsaw</h4>
+          {searchingData &&
+            <h4>{searchingData[0]?.result_object.name}</h4>
+          }
         </div>
         <div className='flex gap-1'>
           <button>
