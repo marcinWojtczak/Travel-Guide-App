@@ -19,6 +19,25 @@ export const getSearchingData = async (searchingDestination) => {
   }
 }
 
+export const getAttractionsData = async (location_id ) => {
+  try {
+    const { data } = await axios.get('https://travel-advisor.p.rapidapi.com/attractions/list', {
+      params: {
+        location_id: location_id,
+        
+      },
+      headers: {
+        'X-RapidAPI-Key': '3105332e11msh264d437b14b7e68p1e62d8jsnb3ffd57a961a',
+        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+      }
+    })
+
+    return data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getRestaurantsData = async (sw, ne) => {
   try {
     const { data } = await axios.get('https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary', {
@@ -37,25 +56,6 @@ export const getRestaurantsData = async (sw, ne) => {
       return data
 
   } catch(error) {
-    console.log(error)
-  }
-}
-
-export const getAttractionsData = async (location_id ) => {
-  try {
-    const { data } = await axios.get('https://travel-advisor.p.rapidapi.com/attractions/list', {
-      params: {
-        location_id: location_id,
-        
-      },
-      headers: {
-        'X-RapidAPI-Key': '3105332e11msh264d437b14b7e68p1e62d8jsnb3ffd57a961a',
-        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-      }
-    })
-
-    return data
-  } catch (error) {
     console.log(error)
   }
 }

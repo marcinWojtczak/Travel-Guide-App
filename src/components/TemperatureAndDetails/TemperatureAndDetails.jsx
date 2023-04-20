@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { BsThermometerHalf, BsWind, BsDroplet, BsSunFill } from 'react-icons/bs'
-import {getWeatherData} from '../../api/openWeatherApi'
+import { getWeatherData } from '../../api/openWeatherApi'
 import weather from '../../assets/icons/01d.png'
 
 const TemperatureAndDetails = ({ coordinates }) => {
@@ -11,21 +11,26 @@ const TemperatureAndDetails = ({ coordinates }) => {
       .then((data) => {
         setWeatherData(data)
       })
-  }, [])
+  }, [coordinates])
 
   return (
     <>
       <div className='flex flex-col justify-between items-center gap-8'>
-        <div className='flex flex-col items-center justify-center gap-4'>
+        <div className='flex flex-col items-center justify-center gap-2'>
           <div className='tracking-wider'>
             <p>{weatherData?.weather[0].description}</p>
           </div>
-          <div className='flex items-center gap-4'>
+          <div className='flex items-center justify-start gap-4'>
             {weatherData && weatherData.weather && weatherData.weather[0] && weatherData.weather[0].icon &&
               (
                 <>
-                  <img src={require(`../../assets/icons/${weatherData?.weather[0].icon}.png`)} alt='weather icon'/>
-                  <span className='text-[60px]'>{Math.floor(weatherData?.temp)}°</span>
+                  <img width='80px' src={require(`../../assets/icons/${weatherData?.weather[0].icon}.png`)} alt='weather icon'/>
+                  <div className='flex'>
+                    <span className='text-[70px]'>{Math.floor(weatherData?.temp)}</span>
+                    <div className='flex items-center'>
+                      <h2 className='text-[60px]'>°C</h2>
+                    </div>
+                  </div>
                 </>
               )
             }

@@ -12,71 +12,73 @@ import { getPlaceName } from './api/googleMapApi';
 function App() {
 
   //Coordinates
-  const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0})
-  const [placeName, setPlaceName] = useState('')
-  const [bounds, setBounds] = useState(null)
+  const [coordinates, setCoordinates] = useState({})
+  console.log(coordinates )
+  // const [placeName, setPlaceName] = useState('')
+  // console.log(placeName)
+  // const [bounds, setBounds] = useState(null)
   const [inputData, setInputData] = useState()
   console.log(inputData)
+
   const [searchingDestination, setSearchingDestination] = useState()
+  console.log(searchingDestination)
+
   const [searchingData, setSearchingData] = useState();
   console.log(searchingData)
-  const [stateValue, setStateValue] = useState();
   
-
+  
+  //set input data to searchingDestination
   const handleSubmit = (e) => {
     e.preventDefault()
     setSearchingDestination(inputData)
-    
   }
   
-  //Set coordinates to be coordinates of the user location
+  // Set coordinates to be coordinates of the user location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       setCoordinates({lat: coords.latitude, lng: coords.longitude})
     })
   },[])
 
-  //
-  useEffect(() => {
-    getPlaceName(coordinates)
-    .then((data) => {
-      setPlaceName(data)
-    })
-  }, [])
-
-  //Get data places info 
-  useEffect(() => {
-    if(bounds) {
-      getRestaurantsData(bounds.sw, bounds.ne)
-      .then((data) => {
-        setRestaurants(data);
-      })
-    }
-  }, []);
-
+  //Get searching date
   useEffect(() => {
     if(searchingDestination) {
       getSearchingData(searchingDestination)
       .then((data) => {
         setSearchingData(data)
-        console.log(data)
+        setCoordinates(data)
       })
     }
   }, [searchingDestination]);
+
+  //
+  // useEffect(() => {
+  //   getPlaceName(coordinates)
+  //   .then((data) => {
+  //     setPlaceName(data)
+  //   })
+  // }, [])
+
+  //Get data places info 
+  // useEffect(() => {
+  //   if(bounds) {
+  //     getRestaurantsData(bounds.sw, bounds.ne)
+  //     .then((data) => {
+  //       setRestaurants(data);
+  //     })
+  //   }
+  // }, []);
 
   return (
     <>
       <Main 
         setInputData={setInputData}
-        setStateValue={setStateValue} 
-        searchingDestination={searchingDestination}
         handleSubmit={handleSubmit}
       />
       <div className='flex flex-row'>
         <div className='basis-3/4'>
-          <SearchingDestination 
+          <SearchingDestination  
             searchingData={searchingData} 
-            coordinates={coordinates}
           />
         </div>
         <div className='basis-1/4'>

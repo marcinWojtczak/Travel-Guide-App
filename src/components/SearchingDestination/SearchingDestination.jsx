@@ -15,7 +15,12 @@ const SearchingDestination = ({ searchingData }) => {
     if(resultType === 'geos') {
       return (
         <div className='flex flex-col gap-8'>
-          <img src={resultObject.photo.images.original.url} height='500'  />
+          {/* <div 
+            style={{backgroundImage: `url("${resultObject.photo.images.original.url}")`}}
+            className='w-full h-[500px] bg-cover bg-center'
+          ></div> */}
+          <img src={resultObject.photo.images.original.url}  />
+          
           <h2 className='font-semibold'>About {resultObject?.name}</h2>
           <h4>{resultObject?.geo_description}</h4>
         </div>
@@ -38,14 +43,10 @@ const SearchingDestination = ({ searchingData }) => {
 
   return (
     <div className='flex flex-col p-16'>
-      {/* { location &&
-        <div className='flex my-2'>
-          <p>{ location[2]?.name } ></p>
-          <p>{ location[1]?.name } ></p>
-          <p>{ location[0]?.name }</p>
-        </div>
-      } */}
-      {displayData()}
+      {searchingData &&
+        displayData()
+      }
+
     </div>
   )
 }
