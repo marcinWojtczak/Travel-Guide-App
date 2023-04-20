@@ -29,6 +29,10 @@ html, body {
     @apply text-xl sm:text-2xl 
   }
 
+  h5 {
+    @apply text-xl
+  }
+
   p {
     @apply text-[14px] sm:text-[16px]
   }
