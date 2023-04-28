@@ -1,31 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import Main from "./components/Main/Main";
 import Map from "./components/Map/Map";
 import Weather from './components/Weather/Weather';
 import PlacesList from './components/PlacesList/PlacesList';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
 import TouristAttractions from './components/TouristAttractions/TouristAttractions';
-import { getRestaurantsData, getSearchingData } from './api/travelAdvisorApi';
-import { getPlaceName } from './api/googleMapApi';
+import { useGetTravelLocationsQuery, useGetTravelAttractionsQuery } from './services/travelAdvisor'
+import { useGetPlaceNameQuery } from './services/googleMap';
 
+export const TravelLocationsContext = createContext()
+export const TravelAttractionsContext = createContext()
+export const CoordinatesContext = createContext()
 
 function App() {
-
-  //Coordinates
-  const [coordinates, setCoordinates] = useState({})
-  console.log(coordinates )
-  // const [placeName, setPlaceName] = useState('')
-  // console.log(placeName)
-  // const [bounds, setBounds] = useState(null)
-  const [inputData, setInputData] = useState()
-  console.log(inputData)
-
-  const [searchingDestination, setSearchingDestination] = useState()
+  const [searchingDestination, setSearchingDestination] = useState('')
   console.log(searchingDestination)
-
-  const [searchingData, setSearchingData] = useState();
-  console.log(searchingData)
   
+  //set coordinate from geolocation
+  const [coordinates, setCoordinates] = useState({})
+  //Input Data
+  const [inputData, setInputData] = useState()
+  //get place address by coordinates
+  const { data: place,  isFetching: placeIsFetching, error: placeError } = useGetPlaceNameQuery(coordinates)
+  //extract place name
+  const placeData = place?.plus_code?.compound_code
+  const placeName = placeData?.split(' ')[1]
+  //get searching destination data
+  const { data: locationsData, isFetching: locationsIsFetching, error: locationError } = 
+  useGetTravelLocationsQuery(searchingDestination)
+  console.log(locationsData)
+  //Get searching destination attractions data
+  const locationDataId = locationsData?.data?.[0]?.result_object.location_id
+  
+  const { data: attractionsData, isFetching: attractionsIsFetching, error: attractionsError } = useGetTravelAttractionsQuery(locationDataId)
   
   //set input data to searchingDestination
   const handleSubmit = (e) => {
@@ -39,17 +46,42 @@ function App() {
       setCoordinates({lat: coords.latitude, lng: coords.longitude})
     })
   },[])
-
-  //Get searching date
+  
+  //set place name as an initial state 
   useEffect(() => {
-    if(searchingDestination) {
-      getSearchingData(searchingDestination)
-      .then((data) => {
-        setSearchingData(data)
-        setCoordinates(data)
-      })
+    if(placeName) {
+      setSearchingDestination(placeName)
     }
-  }, [searchingDestination]);
+  }, [placeName])
+
+  
+
+  return (
+    <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching}}>
+      <TravelAttractionsContext.Provider value={{attractionsData, searchingDestination, locationsData}}>
+        <CoordinatesContext.Provider value={coordinates}>
+          <Main setInputData={setInputData} handleSubmit={handleSubmit}/>
+          <SearchingDestination />
+          {/* <Weather  /> */}
+          <TouristAttractions  />
+        </CoordinatesContext.Provider>
+      </TravelAttractionsContext.Provider>
+    </TravelLocationsContext.Provider>
+  );
+}
+
+export default App;
+
+//Get searching date
+  // useEffect(() => {
+  //   if(searchingDestination) {
+  //     getSearchingData(searchingDestination)
+  //     .then((data) => {
+  //       setSearchingData(data)
+  //       setCoordinates(data)
+  //     })
+  //   }
+  // }, [searchingDestination]);
 
   //
   // useEffect(() => {
@@ -69,39 +101,14 @@ function App() {
   //   }
   // }, []);
 
-  return (
-    <>
-      <Main 
-        setInputData={setInputData}
-        handleSubmit={handleSubmit}
-      />
-      <div className='flex flex-row'>
-        <div className='basis-3/4'>
-          <SearchingDestination  
-            searchingData={searchingData} 
-          />
-        </div>
-        <div className='basis-1/4'>
-          <Weather 
-            searchingData={searchingData}
-            coordinates={coordinates}
-          />
-        </div>
-      </div>
-      <TouristAttractions 
-        searchingData={searchingData}
-      />
-
-      {/* <Map 
+  {/* <Map 
         coordinates={coordinates} 
         setCoordinates={setCoordinates}
         bounds={bounds}
         setBounds={setBounds}
         places={places}
       /> */}
-    </>
-  );
-}
 
-export default App;
-
+      // const [placeName, setPlaceName] = useState('')
+  // console.log(placeName)
+  // const [bounds, setBounds] = useState(null)
