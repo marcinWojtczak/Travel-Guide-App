@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext } from 'react';
 import { BsThermometerHalf, BsWind, BsDroplet, BsSunFill } from 'react-icons/bs';
-import weather from '../../assets/icons/01d.png';
+import weather from '../../assets/icons/01d.png'
 import { useGetWeatherQuery } from '../../services/openWeather';
 import { CoordinatesContext } from '../../App';
 

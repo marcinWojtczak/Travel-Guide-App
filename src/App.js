@@ -5,17 +5,16 @@ import Weather from './components/Weather/Weather';
 import PlacesList from './components/PlacesList/PlacesList';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
 import TouristAttractions from './components/TouristAttractions/TouristAttractions';
-import { useGetTravelLocationsQuery, useGetTravelAttractionsQuery } from './services/travelAdvisor'
+import Hotels from './components/Hotels/Hotels';
+import { useGetTravelLocationsQuery } from './services/travelAdvisor'
 import { useGetPlaceNameQuery } from './services/googleMap';
 
 export const TravelLocationsContext = createContext()
-export const TravelAttractionsContext = createContext()
 export const CoordinatesContext = createContext()
 
 function App() {
+
   const [searchingDestination, setSearchingDestination] = useState('')
-  console.log(searchingDestination)
-  
   //set coordinate from geolocation
   const [coordinates, setCoordinates] = useState({})
   //Input Data
@@ -28,11 +27,11 @@ function App() {
   //get searching destination data
   const { data: locationsData, isFetching: locationsIsFetching, error: locationError } = 
   useGetTravelLocationsQuery(searchingDestination)
-  console.log(locationsData)
   //Get searching destination attractions data
-  const locationDataId = locationsData?.data?.[0]?.result_object.location_id
   
-  const { data: attractionsData, isFetching: attractionsIsFetching, error: attractionsError } = useGetTravelAttractionsQuery(locationDataId)
+  const locationDataId = locationsData?.data?.[0]?.result_object.location_id
+  console.log(locationDataId)
+  
   
   //set input data to searchingDestination
   const handleSubmit = (e) => {
@@ -54,18 +53,13 @@ function App() {
     }
   }, [placeName])
 
-  
-
   return (
-    <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching}}>
-      <TravelAttractionsContext.Provider value={{attractionsData, searchingDestination, locationsData}}>
-        <CoordinatesContext.Provider value={coordinates}>
-          <Main setInputData={setInputData} handleSubmit={handleSubmit}/>
-          <SearchingDestination />
-          {/* <Weather  /> */}
-          <TouristAttractions  />
-        </CoordinatesContext.Provider>
-      </TravelAttractionsContext.Provider>
+    <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching, locationDataId}}>
+      <CoordinatesContext.Provider value={coordinates}>
+        <Main setInputData={setInputData} handleSubmit={handleSubmit}/>
+        <SearchingDestination />
+        {/* <Weather  /> */}
+      </CoordinatesContext.Provider>
     </TravelLocationsContext.Provider>
   );
 }
