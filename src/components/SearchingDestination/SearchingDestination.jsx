@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { TravelLocationsContext } from '../../App';
 import TouristAttractions  from '../TouristAttractions/TouristAttractions';
+import Restaurants  from '../Restaurants/Restaurants';
 import Hotels  from '../Hotels/Hotels'
 
 const SearchingDestination = () => {
@@ -65,6 +66,7 @@ const SearchingDestination = () => {
           <div className='flex flex-col gap-32'>
             <TouristAttractions />
             <Hotels />
+            <Restaurants />
           </div>
         </div>
     </div>

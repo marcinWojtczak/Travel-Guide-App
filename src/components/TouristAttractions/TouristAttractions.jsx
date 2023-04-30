@@ -10,8 +10,7 @@ const TouristAttractions = () => {
 
   const { data: attractionsData, isFetching: attractionsIsFetching, error: attractionsError } = useGetTravelAttractionsQuery(locationDataId)
 
-
-  console.log(attractionsData)
+    console.log(attractionsData)
   
   return (
     <div className='flex-col lg:flex-row gap-4 md:flex'>
@@ -21,8 +20,9 @@ const TouristAttractions = () => {
         <a><h5>See All</h5></a>
       </div>
       {attractionsData?.data
-        ?.filter(attraction => attraction.ranking_position >= 1 && attraction.ranking_position <= 4 &&
+        ?.filter(attraction => attraction.ranking_position >= 1 && attraction.ranking_position <= 6 &&
           attraction.parent_display_name === name )
+        .slice(0, 4)
         .sort((a, b) => a.ranking_position - b.ranking_position)
         .map((attraction, index) => (
           <div key={index} className='basis-1/3 flex flex-col gap-4'>

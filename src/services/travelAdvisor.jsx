@@ -22,9 +22,12 @@ export const travelApi = createApi({
     }),
     getHotels: builder.query({
       query: (location_id) => createRequest(`/hotels/list?location_id=${location_id}`)
+    }),
+    getRestaurants: builder.query({
+      query: (location_id) => createRequest(`/restaurants/list?location_id=${location_id}`)
     })
   })  
 })
 
-export const { useGetTravelLocationsQuery, useGetTravelAttractionsQuery, useGetHotelsQuery } = travelApi
+export const { useGetTravelLocationsQuery, useGetTravelAttractionsQuery, useGetHotelsQuery, useGetRestaurantsQuery } = travelApi
 

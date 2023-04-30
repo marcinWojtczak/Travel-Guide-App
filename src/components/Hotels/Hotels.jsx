@@ -18,7 +18,6 @@ const Hotels = () => {
         </div>
         {hotelsData
           ?.filter(hotel => hotel.result_type === 'lodging')
-          // .sort((a, b) => a.ranking_position - b.ranking_position)
           .slice(0, 4)
           .map((hotel, index) => (
             <div key={index} className='basis-1/3 flex flex-col gap-4'>
@@ -29,7 +28,6 @@ const Hotels = () => {
               </div>
               <div>
                 <h5 className='font-semibold'>{hotel.result_object?.name}</h5>
-                {/* <p className='font-medium text-zinc-700'>{hotel?.subtype[0]?.name}</p> */}
                 <p className='font-medium text-zinc-700'>Number Reviews: {hotel?.result_object?.num_reviews}</p>
                 <p className='font-medium text-zinc-700'>Rating: {hotel?.result_object?.rating}</p>
               </div>
