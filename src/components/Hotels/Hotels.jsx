@@ -8,19 +8,21 @@ const Hotels = () => {
   const name = locationsData?.data?.[0]?.result_object?.name
   const hotelsData = locationsData?.data
   console.log(hotelsData)
+  
 
   return (
-      <div className='flex flex-col basis 1/5 lg:flex-row gap-4 md:flex'>
-        <div className='flex flex-col gap-4 md:gap-4 '>
+      <div className='flex-col lg:flex-row gap-4 md:flex border-y-2 border-black py-8'>
+        <div className='basis-1/5 flex flex-col gap-4 md:gap-4'>
           <h3 className='font-semibold'>Stay</h3>
           <h5>A mix of the charming, modern, and tried and true.</h5>
-          <a><h5>See All</h5></a>
+          <a><h5 className='underline font-bold'>See All</h5></a>
         </div>
         {hotelsData
-          ?.filter(hotel => hotel.result_type === 'lodging')
+          ?.filter((hotel) => hotel.result_type === 'lodging'  &&
+          hotel.result_object.address_obj?.city === name)
           .slice(0, 4)
           .map((hotel, index) => (
-            <div key={index} className='basis-1/3 flex flex-col gap-4'>
+            <div key={index} className='basis-1/5 flex flex-col gap-4'>
               <div 
                 style={{backgroundImage: `url("${hotel?.result_object?.photo?.images?.original?.url}")`}}
                 className='h-[450px] lg:h-[200px] xl:h-[300px] 2xl:h-[400px] bg-cover bg-center'

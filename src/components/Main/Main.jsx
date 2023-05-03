@@ -1,8 +1,23 @@
+import { useRef, useEffect } from 'react'
 import { greece, river, mountains2, barcelona, canyon, sanFrancisco, island, peru } from '../../assets/index';
 import Navbar from '../Navbar/Navbar';
 
 
 const Main = ({ setInputData, handleSubmit }) => {
+
+  const autoCompleteRef = useRef();
+  const inputRef = useRef();
+  const options = {
+    // fields: [ "name"],
+    types: ['(cities)']
+  };
+
+  useEffect(() => {
+    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+    inputRef.current,
+    options
+    );
+  }, []);
   
   return (
     <>
@@ -15,6 +30,7 @@ const Main = ({ setInputData, handleSubmit }) => {
             type='text'
             name='destination'
             onChange={(e) => setInputData(e.target.value)}
+            // ref={inputRef}
             >
             </input>
             <button type='submit'></button>

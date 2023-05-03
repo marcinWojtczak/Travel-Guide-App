@@ -18,7 +18,6 @@ const SearchingDestination = () => {
 
     const resultType = data?.[0]?.result_type
     const resultObject = data?.[0]?.result_object;
-    console.log(resultType)
     
     if(resultType === 'geos') {
       return (

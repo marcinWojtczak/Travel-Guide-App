@@ -13,19 +13,18 @@ const TouristAttractions = () => {
     console.log(attractionsData)
   
   return (
-    <div className='flex-col lg:flex-row gap-4 md:flex'>
-      <div className='basis-1/3 flex flex-col gap-4 md:gap-4 '>
+    <div className='flex-col lg:flex-row gap-4 md:flex border-y-2 border-black py-8'>
+      <div className='basis-1/5 flex flex-col gap-4 md:gap-4 '>
         <h3 className='font-semibold'>Do</h3>
         <h5>Places to see, ways to wander, and signature experiences.</h5>
-        <a><h5>See All</h5></a>
+        <a><h5 className='underline font-bold'>See All</h5></a>
       </div>
       {attractionsData?.data
-        ?.filter(attraction => attraction.ranking_position >= 1 && attraction.ranking_position <= 6 &&
-          attraction.parent_display_name === name )
+        ?.filter((attraction) => attraction?.address_obj?.city === name )
         .slice(0, 4)
         .sort((a, b) => a.ranking_position - b.ranking_position)
         .map((attraction, index) => (
-          <div key={index} className='basis-1/3 flex flex-col gap-4'>
+          <div key={index} className='basis-1/5 flex flex-col gap-4'>
             <div 
               style={{backgroundImage: `url("${attraction.photo?.images?.large?.url}")`}}
               className='h-[450px] lg:h-[200px] xl:h-[300px] 2xl:h-[400px] bg-cover bg-center'
