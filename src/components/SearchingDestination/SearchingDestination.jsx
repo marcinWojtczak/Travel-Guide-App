@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { TravelLocationsContext } from '../../App';
-import TouristAttractions  from '../TouristAttractions/TouristAttractions';
-import Restaurants  from '../Restaurants/Restaurants';
-import Hotels  from '../Hotels/Hotels'
+import TouristAttractions  from './TouristAttractions/TouristAttractions';
+import Restaurants  from './Restaurants/Restaurants';
+import Hotels  from './Hotels/Hotels';
+
 
 const SearchingDestination = () => {
 

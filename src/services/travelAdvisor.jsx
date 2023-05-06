@@ -15,7 +15,6 @@ export const travelApi = createApi({
   endpoints: (builder) => ({
     getTravelLocations: builder.query({
       query: (searchingDestination) => createRequest(`/locations/search?query=${searchingDestination}`)
-
     }),
     getTravelAttractions: builder.query({
       query: (location_id) => createRequest(`/attractions/list?location_id=${location_id}`)

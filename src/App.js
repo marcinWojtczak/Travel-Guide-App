@@ -4,8 +4,6 @@ import Map from "./components/Map/Map";
 import Weather from './components/Weather/Weather';
 import PlacesList from './components/PlacesList/PlacesList';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
-import TouristAttractions from './components/TouristAttractions/TouristAttractions';
-import Hotels from './components/Hotels/Hotels';
 import { useGetTravelLocationsQuery } from './services/travelAdvisor'
 import { useGetPlaceNameQuery } from './services/googleMap';
 
@@ -19,18 +17,21 @@ function App() {
   const [coordinates, setCoordinates] = useState({})
   //Input Data
   const [inputData, setInputData] = useState()
+
   //get place address by coordinates
   const { data: place,  isFetching: placeIsFetching, error: placeError } = useGetPlaceNameQuery(coordinates)
+  // console.log(inputData)
   //extract place name
   const placeData = place?.plus_code?.compound_code
   const placeName = placeData?.split(' ')[1]
   //get searching destination data
   const { data: locationsData, isFetching: locationsIsFetching, error: locationError } = 
   useGetTravelLocationsQuery(searchingDestination)
+  console.log(locationsData)
   //Get searching destination attractions data
   
   const locationDataId = locationsData?.data?.[0]?.result_object.location_id
-  console.log(locationDataId)
+
   
   
   //set input data to searchingDestination
@@ -56,7 +57,7 @@ function App() {
   return (
     <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching, locationDataId}}>
       <CoordinatesContext.Provider value={coordinates}>
-        <Main setInputData={setInputData} handleSubmit={handleSubmit}/>
+        <Main setInputData={setInputData} handleSubmit={handleSubmit} inputData={inputData}/>
         <SearchingDestination />
         {/* <Weather  /> */}
       </CoordinatesContext.Provider>
