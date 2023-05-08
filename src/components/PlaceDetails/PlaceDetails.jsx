@@ -24,8 +24,8 @@ const PlaceDetails = ({ place }) => {
         </div>
         }
         <div className='flex flex-wrap gap-2'>
-          {place?.cuisine?.map(({name}) => (
-            <label className='border-2 rounded-md px-3 bg-gray-300'>{name}</label>
+          {place?.cuisine?.map(({name}, index) => (
+            <label className='border-2 rounded-md px-3 bg-gray-300' key={index}>{name}</label>
           ))}
         </div>
         <div className='flex items-center'>

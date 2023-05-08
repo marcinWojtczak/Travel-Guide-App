@@ -11,6 +11,7 @@ const Slider = () => {
   const {locationsData, locationDataId} = useContext(TravelLocationsContext)
   const name = locationsData?.data?.[0]?.result_object?.name
 
+  //fetching data by location id
   const { data: restaurantsData, isFetching: restaurantsIsFetching, error: restaurantsError } = useGetRestaurantsQuery(locationDataId)
   
 return (

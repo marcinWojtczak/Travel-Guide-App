@@ -1,43 +1,45 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import Main from "./components/Main/Main";
-import Map from "./components/Map/Map";
-import Weather from './components/Weather/Weather';
-import PlacesList from './components/PlacesList/PlacesList';
+import Navbar from './components/Navbar/Navbar';
+import Map from './components/Map/Map';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
 import { useGetTravelLocationsQuery } from './services/travelAdvisor'
 import { useGetPlaceNameQuery } from './services/googleMap';
+import {Route, Routes } from 'react-router-dom';
 
 export const TravelLocationsContext = createContext()
 export const CoordinatesContext = createContext()
+export const PlaceNameContext = createContext()
 
 function App() {
-
-  const [searchingDestination, setSearchingDestination] = useState('')
+  //searching place, 
+  const [searchingPlace, setSearchingPlace] = useState('')
+  console.log(searchingPlace)
+  
   //set coordinate from geolocation
   const [coordinates, setCoordinates] = useState({})
-  //Input Data
+  // const [inputCoordinates, setInputCoordinates] = useState('')
   const [inputData, setInputData] = useState()
-
+  
+  
   //get place address by coordinates
   const { data: place,  isFetching: placeIsFetching, error: placeError } = useGetPlaceNameQuery(coordinates)
-  // console.log(inputData)
+  
   //extract place name
   const placeData = place?.plus_code?.compound_code
   const placeName = placeData?.split(' ')[1]
-  //get searching destination data
+  //get searching place data
   const { data: locationsData, isFetching: locationsIsFetching, error: locationError } = 
-  useGetTravelLocationsQuery(searchingDestination)
-  console.log(locationsData)
-  //Get searching destination attractions data
+  useGetTravelLocationsQuery(searchingPlace)
   
-  const locationDataId = locationsData?.data?.[0]?.result_object.location_id
+  const inputCoordinates = ({lat: locationsData?.data?.[0]?.result_object?.latitude, lng: locationsData?.data?.[0]?.result_object?.longitude })
 
+  const locationDataId = locationsData?.data?.[0]?.result_object.location_id
   
-  
-  //set input data to searchingDestination
+  //set input data to search Place
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSearchingDestination(inputData)
+    setSearchingPlace(inputData)
   }
   
   // Set coordinates to be coordinates of the user location
@@ -47,21 +49,38 @@ function App() {
     })
   },[])
   
-  //set place name as an initial state 
+  //set place name as an initial place 
   useEffect(() => {
     if(placeName) {
-      setSearchingDestination(placeName)
+      setSearchingPlace(placeName)
     }
   }, [placeName])
 
+  // useEffect(() => {
+  //   setCoordinates(inputCoordinates)
+  // },[inputData])
+
   return (
     <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching, locationDataId}}>
-      <CoordinatesContext.Provider value={coordinates}>
-        <Main setInputData={setInputData} handleSubmit={handleSubmit} inputData={inputData}/>
-        <SearchingDestination />
-        {/* <Weather  /> */}
+      <CoordinatesContext.Provider value={{ coordinates, setCoordinates }}>
+        <Navbar />
+        <Routes>
+          <Route 
+            path='/' 
+            element={
+            <>
+              <Main setSearchingPlace={setSearchingPlace} handleSubmit={handleSubmit} setInputData={setInputData}/>
+              <SearchingDestination />
+            </>
+          }>
+          </Route>
+          <Route 
+            path='/map' 
+            element={<Map />}>
+          </Route>
+        </Routes>
       </CoordinatesContext.Provider>
-    </TravelLocationsContext.Provider>
+  </TravelLocationsContext.Provider>
   );
 }
 

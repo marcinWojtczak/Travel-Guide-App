@@ -27,9 +27,9 @@ const PlacesList = ({ places }) => {
         </div>
       </div>
       <div className='flex flex-col gap-6 h-full w-full overflow-x-auto items-center'>
-        {places?.data?.map((place, index) => (
-        <div className='shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] w-[90%] outline-0'>
-          <PlaceDetails place={place}/>
+        {places?.map((place, index) => (
+        <div className='shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] w-[90%] outline-0' key={index}>
+          <PlaceDetails place={place} key={index}/>
         </div>
         ))}
       </div>

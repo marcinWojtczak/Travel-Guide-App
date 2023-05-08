@@ -7,9 +7,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const Slider = ({}) => {
+
   const {locationsData, locationDataId} = useContext(TravelLocationsContext)
   const name = locationsData?.data?.[0]?.result_object?.name
 
+  //fetching data by location id
   const { data: attractionsData, isFetching: attractionsIsFetching, error: attractionsError } = useGetTravelAttractionsQuery(locationDataId)
 
 return (

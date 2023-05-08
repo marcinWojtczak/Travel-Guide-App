@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom'
 import { SiYourtraveldottv, SiInstagram, SiFacebook} from "react-icons/si"
 import { RiCloseLine, RiMenuFill } from "react-icons/ri"
 
@@ -14,10 +15,12 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 lg:px-14 bg-[white]">
-      <div className="flex justify-evenly cursor-pointer gap-2">
-        <a href="/"><h2><SiYourtraveldottv /></h2></a> 
-        <h2 className='font-bold'>Travel Places</h2>
-      </div>
+      <Link to="/">
+        <div className="flex justify-evenly cursor-pointer gap-2">
+          <h2><SiYourtraveldottv /></h2>
+          <h2 className='font-bold'>Travel Places</h2>
+        </div>
+      </Link>
 
       <div className="max-lg:hidden">
         <ul className="flex justify-evenly items-center gap-12">

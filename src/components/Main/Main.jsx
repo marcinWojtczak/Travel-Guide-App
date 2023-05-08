@@ -1,25 +1,23 @@
-import React, { useRef, useEffect, useState } from 'react'
-import { greece, river, mountains2, barcelona, canyon, sanFrancisco, island, peru } from '../../assets/index';
-import Navbar from '../Navbar/Navbar';
+import React, { useRef, useState } from 'react'
+import { sanFrancisco,  } from '../../assets/index';
 import GoogleMapReact from 'google-map-react';
 
 
-const Main = ({ setInputData, handleSubmit, inputData}) => {
+const Main = ({ setInputData, handleSubmit}) => {
   const [inputValue, setInputValue] = useState('');
   const autoCompleteRef = useRef(null);
   const inputRef = useRef(null);
   
 
-  useEffect(() => {
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-    inputRef.current, {
-      types: ['(cities)']
-    });
-  }, []);
+  // useEffect(() => {
+  //   autoCompleteRef.current = new window.google.maps.places.Autocomplete(
+  //   inputRef.current, {
+  //     types: ['(cities)']
+  //   });
+  // }, []);
 
   return (
     <>
-      <Navbar />
       <div style={{backgroundImage: `url(${sanFrancisco})` }} className='bg-center bg-cover w-full h-screen flex flex-col justify-center items-center'>
         <div className='w-2/3 text-center'>
           <h1 className='font-bold w-content tracking-wider mb-6'>Explore the World with Us - Your Ultimate Travel Guide</h1>
@@ -28,7 +26,7 @@ const Main = ({ setInputData, handleSubmit, inputData}) => {
             type='text'
             name='destination'
             onChange={(e) => setInputData(e.target.value)}
-            ref={inputRef}
+            // ref={inputRef}
             
             >
             </input>

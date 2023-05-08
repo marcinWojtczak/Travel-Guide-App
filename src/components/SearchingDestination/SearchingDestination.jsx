@@ -10,6 +10,7 @@ const SearchingDestination = () => {
   const {locationsData, locationsIsFetching} = useContext(TravelLocationsContext)
   const data = locationsData?.data
   const name = locationsData?.data?.[0]?.result_object?.name
+  console.log(locationsData)
 
 
   const displayData = () => {

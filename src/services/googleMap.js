@@ -10,9 +10,6 @@ export const googleMapApi = createApi({
     getPlaceName: builder.query({
       query: (coordinates) => (`/geocode/json?latlng=${coordinates.lat},${coordinates.lng}&key=${googleApiKey}`)
     }),
-    // getPlaces: builder.query({
-    //   query: () => (`place/details/json?place_id=298571&fields=name,formatted_address,geometry&key=${googleApiKey}`)
-    // })
   })
 })
 

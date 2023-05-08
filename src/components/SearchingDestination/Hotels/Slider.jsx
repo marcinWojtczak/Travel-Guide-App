@@ -11,9 +11,8 @@ const Slider = () => {
   const {locationsData, locationDataId} = useContext(TravelLocationsContext)
   const name = locationsData?.data?.[0]?.result_object?.name
   
+  //fetching data by location id
   const { data: hotelsData, isFetching: hotelsIsFetching, error: hotelsError } = useGetHotelsQuery(locationDataId)
-
-  console.log(hotelsData)
   
   return (
     <>
@@ -29,9 +28,9 @@ const Slider = () => {
         pagination={{ el:'.swiper-pagination', clickable: true }}
       >
         {hotelsData?.data
-          ?.filter((hotel) => hotel.ranking_geo === name)
+          ?.filter((hotel) => hotel?.ranking_geo === name)
           .slice(0, 10)
-          .map((hotel, index) => (
+          ?.map((hotel, index) => (
             <SwiperSlide key={index} className='flex-col basis-1/3'>
               <div 
                 style={{backgroundImage: `url("${hotel?.photo?.images?.original?.url}")`}}
