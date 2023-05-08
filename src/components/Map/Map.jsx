@@ -11,23 +11,22 @@ import { googleMapApi } from '../../services/googleMap';
 const Map = () => {
 
   const { coordinates, setCoordinates } = useContext(CoordinatesContext)
-  console.log(coordinates)
   
-  const [places, setPlaces] = useState({});
+  const [places, setPlaces] = useState();
   console.log(places)
   const [bounds, setBounds] = useState({})
 
-  const { data: {data: placesInBoundary} = {} } = useGetPlacesInBoundaryQuery(bounds)
-  console.log(placesInBoundary)
+  const { data: placesInBoundary } = useGetPlacesInBoundaryQuery(bounds)
+  
   
   useEffect(() => {
-    if (placesInBoundary) {
-    setPlaces(placesInBoundary)
+    if(placesInBoundary) {
+    setPlaces(placesInBoundary.data)
     }
   }, [placesInBoundary])
   
   useEffect(() => {
-    setPlaces(placesInBoundary)
+    setPlaces(placesInBoundary?.data)
   }, [bounds, coordinates])
 
 return (
@@ -50,7 +49,7 @@ return (
           }}
           // onChildClick={''}
         >
-          {places?.map((place, index) => (
+          {places && places?.map((place, index) => (
             <div 
               className='w-[150px] h-[150px] bg-white border-2 text-center p-2'
               lat={(place.latitude)}
