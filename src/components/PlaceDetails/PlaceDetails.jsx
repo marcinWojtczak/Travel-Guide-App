@@ -1,17 +1,33 @@
 import React from 'react';
 import { BsFillTelephoneFill, BsGlobe } from "react-icons/bs";
+import ReactStarRatings from 'react-star-ratings';
+
 
 
 const PlaceDetails = ({ place }) => {
-  
+
+  //convert rating to number
+  const rating = Number(place?.rating)
+
   return (
     <div className='flex flex-col gap-4'>
       <img src={place?.photo ? place.photo.images?.large?.url : ''} />
       <div className='px-2 mb-4 flex flex-col gap-3'>
         <h4 className='font-bold'>{place.name}</h4>
         <div className='flex justify-between'>
-          <p>Rating: </p>
-          <p>{place?.rating} ({place.num_reviews})</p>
+          {rating &&
+          <ReactStarRatings
+            rating={rating}
+            starRatedColor='gold'
+            numberOfStars={5}
+            name='rating'
+            starDimension='25px'
+            starSpacing='2px'
+            
+          >
+          </ReactStarRatings>
+          } 
+          <p>{place.num_reviews} reviews</p>
         </div>
         <div className='flex justify-between'>
           <p>Ranking: </p>
