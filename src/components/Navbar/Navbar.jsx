@@ -14,7 +14,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex justify-between items-center sticky top-0 z-10 py-8 px-10 lg:px-14 bg-[white]">
+    <nav className="flex justify-between items-center sticky top-0 z-20 py-8 px-10 lg:px-14 bg-[white]">
       <Link to="/">
         <div className="flex justify-evenly cursor-pointer gap-2">
           <h2><SiYourtraveldottv /></h2>

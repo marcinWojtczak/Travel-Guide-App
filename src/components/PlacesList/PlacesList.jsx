@@ -1,10 +1,23 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, createRef, useContext} from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
+import { ChildClickedContext } from '../../App';
 
 const PlacesList = ({ places }) => {
   
+  const { childClicked } = useContext(ChildClickedContext)
   const [type, setType] = useState('restaurants');
   const [rating, setRating] = useState('');
+  //all references
+  const [elRefs, setElRefs] = useState([]);
+
+  console.log(elRefs)
+
+  useEffect(() => {
+    
+    setElRefs((refs) => Array(places.length).fill().map((_, index) => refs[index] || createRef()));
+  
+    
+  }, [places]);
 
   return (
     <div className='h-full'>
@@ -26,10 +39,13 @@ const PlacesList = ({ places }) => {
           </select>
         </div>
       </div>
-      <div className='flex flex-col gap-6 h-full w-full overflow-x-auto items-center'>
+      <div className='flex flex-col gap-6 h-[80%] w-full overflow-x-auto items-center'>
         {places?.map((place, index) => (
-        <div className='shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] w-[90%] outline-0' key={index}>
-          <PlaceDetails place={place} key={index}/>
+        <div key={index} ref={elRefs[index]} className='border-t border-b border-zinc-400 w-[90%] ' >
+          <PlaceDetails 
+            place={place} 
+            selected={Number(childClicked) == index} 
+            refProp={elRefs[index]}/>
         </div>
         ))}
       </div>

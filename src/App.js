@@ -10,6 +10,7 @@ import {Route, Routes } from 'react-router-dom';
 export const TravelLocationsContext = createContext()
 export const CoordinatesContext = createContext()
 export const PlaceNameContext = createContext()
+export const ChildClickedContext = createContext()
 
 function App() {
   //searching place, 
@@ -20,6 +21,8 @@ function App() {
   const [coordinates, setCoordinates] = useState({})
   // const [inputCoordinates, setInputCoordinates] = useState('')
   const [inputData, setInputData] = useState()
+  const [childClicked, setChildClicked] = useState(null);
+  
   
   
   //get place address by coordinates
@@ -63,22 +66,24 @@ function App() {
   return (
     <TravelLocationsContext.Provider value={{locationsData, locationsIsFetching, locationDataId}}>
       <CoordinatesContext.Provider value={{ coordinates, setCoordinates }}>
-        <Navbar />
-        <Routes>
-          <Route 
-            path='/' 
-            element={
-            <>
-              <Main setSearchingPlace={setSearchingPlace} handleSubmit={handleSubmit} setInputData={setInputData}/>
-              <SearchingDestination />
-            </>
-          }>
-          </Route>
-          <Route 
-            path='/map' 
-            element={<Map />}>
-          </Route>
-        </Routes>
+        <ChildClickedContext.Provider value={{childClicked, setChildClicked}}>
+          <Navbar />
+          <Routes>
+            <Route 
+              path='/' 
+              element={
+              <>
+                <Main setSearchingPlace={setSearchingPlace} handleSubmit={handleSubmit} setInputData={setInputData}/>
+                <SearchingDestination />
+              </>
+            }>
+            </Route>
+            <Route 
+              path='/map' 
+              element={<Map />}>
+            </Route>
+          </Routes>
+        </ChildClickedContext.Provider>
       </CoordinatesContext.Provider>
   </TravelLocationsContext.Provider>
   );

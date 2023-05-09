@@ -4,30 +4,34 @@ import ReactStarRatings from 'react-star-ratings';
 
 
 
-const PlaceDetails = ({ place }) => {
-
+const PlaceDetails = ({ place, selected, refProp }) => {
   //convert rating to number
   const rating = Number(place?.rating)
+console.log(refProp)
+  if(selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start'})
 
   return (
-    <div className='flex flex-col gap-4'>
-      <img src={place?.photo ? place.photo.images?.large?.url : ''} />
-      <div className='px-2 mb-4 flex flex-col gap-3'>
-        <h4 className='font-bold'>{place.name}</h4>
-        <div className='flex justify-between'>
-          {rating &&
-          <ReactStarRatings
-            rating={rating}
-            starRatedColor='gold'
-            numberOfStars={5}
-            name='rating'
-            starDimension='25px'
-            starSpacing='2px'
-            
-          >
-          </ReactStarRatings>
-          } 
-          <p>{place.num_reviews} reviews</p>
+    <div className='flex flex-row gap-4'>
+      <div className='px-2 mb-4 flex flex-col gap-3 p-4 w-full'>
+        <div className='flex justify-between gap-4'>
+          <div className='basis-[60%]'>
+            <h4 className='font-bold'>{place.name}</h4>
+            {rating &&
+            <ReactStarRatings
+              rating={rating}
+              starRatedColor='gold'
+              numberOfStars={5}
+              name='rating'
+              starDimension='25px'
+              starSpacing='2px'
+            >
+            </ReactStarRatings>
+            } 
+            <p>{place.num_reviews} reviews</p>
+          </div>
+          <div className='basis-[40%]'>
+            <img src={place?.photo ? place.photo.images?.large?.url : ''} className='rounded-lg '/>
+          </div>
         </div>
         <div className='flex justify-between'>
           <p>Ranking: </p>
@@ -48,7 +52,7 @@ const PlaceDetails = ({ place }) => {
           <a className='underline underline-offset-2 mr-10 text-blue-900' target='_blank' href={place?.web_url}><BsGlobe className='inline mr-1 '/>Trip Advisor Website</a>
           <a className='underline underline-offset-2 text-blue-900' target='_blank' href={place?.website}> Website</a>
         </div>
-      </div>
+      </div>  
     </div>
   )
 }
