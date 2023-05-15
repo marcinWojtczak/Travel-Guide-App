@@ -13,23 +13,20 @@ export const travelApi = createApi({
   reducerPath: 'travelApi',
   baseQuery: fetchBaseQuery({ baseUrl }),
   endpoints: (builder) => ({
-    getTravelLocations: builder.query({
-      query: (searchingDestination) => createRequest(`/locations/search?query=${searchingDestination}`)
-    }),
-    getTravelAttractions: builder.query({
-      query: (location_id) => createRequest(`/attractions/list?location_id=${location_id}`)
+    getAttractions: builder.query({
+      query: (bounds) => createRequest(`/attractions/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
     }),
     getHotels: builder.query({
-      query: (location_id) => createRequest(`/hotels/list?location_id=${location_id}`)
+      query: (bounds) => createRequest(`/hotels/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
     }),
     getRestaurants: builder.query({
-      query: (location_id) => createRequest(`/restaurants/list?location_id=${location_id}`)
+      query: (bounds) => createRequest(`/restaurants/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
     }),
     getPlacesInBoundary: builder.query({
-      query: (bounds) => createRequest(`restaurants/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
-    })
+      query: (type, bounds) => createRequest(`/${type}/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
+    }),
   })  
 })
 
-export const { useGetTravelLocationsQuery, useGetTravelAttractionsQuery, useGetHotelsQuery, useGetRestaurantsQuery, useGetPlacesInBoundaryQuery} = travelApi
+export const {useGetAttractionsQuery, useGetHotelsQuery, useGetRestaurantsQuery, useGetPlacesInBoundaryQuery} = travelApi
 

@@ -1,13 +1,12 @@
 import React from 'react';
-import { BsFillTelephoneFill, BsGlobe } from "react-icons/bs";
+import { BsGlobe } from "react-icons/bs";
 import ReactStarRatings from 'react-star-ratings';
 
+const PlaceDetails = ({selected, refProp, place }) => {
 
-
-const PlaceDetails = ({ place, selected, refProp }) => {
   //convert rating to number
   const rating = Number(place?.rating)
-console.log(refProp)
+
   if(selected) refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start'})
 
   return (

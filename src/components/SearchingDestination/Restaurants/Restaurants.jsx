@@ -13,7 +13,7 @@ const Restaurants = () => {
           <Link to='map'>See Al</Link>
         </h5>
       </div>
-      <div className='basis-4/5 flex w-[40%]'>
+      <div className='basis-4/5 flex w-full'>
         <Slider />
       </div>
     </div>

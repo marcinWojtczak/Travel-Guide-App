@@ -1,18 +1,18 @@
-import React, {useContext} from 'react';
-import { TravelLocationsContext } from '../../../App'
+import React, {useContext, useState} from 'react';
 import { useGetHotelsQuery } from '../../../services/travelAdvisor';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { BoundsContext } from '../../../App';
 
 const Slider = () => {
-
-  const {locationsData, locationDataId} = useContext(TravelLocationsContext)
-  const name = locationsData?.data?.[0]?.result_object?.name
   
-  //fetching data by location id
-  const { data: hotelsData, isFetching: hotelsIsFetching, error: hotelsError } = useGetHotelsQuery(locationDataId)
+  const {bounds} = useContext(BoundsContext)
+
+  const { data: hotelsData, isLoading } = useGetHotelsQuery(bounds);
+
+  if(isLoading) return <h4>Loading...</h4>
   
   return (
     <>
@@ -28,9 +28,10 @@ const Slider = () => {
         pagination={{ el:'.swiper-pagination', clickable: true }}
       >
         {hotelsData?.data
-          ?.filter((hotel) => hotel?.ranking_geo === name)
+          ?.filter((hotel) => hotel.ranking_position)
           .slice(0, 10)
-          ?.map((hotel, index) => (
+          .sort((a, b) => a.ranking_position - b.ranking_position)
+          .map((hotel, index) => (
             <SwiperSlide key={index} className='flex-col basis-1/3'>
               <div 
                 style={{backgroundImage: `url("${hotel?.photo?.images?.original?.url}")`}}

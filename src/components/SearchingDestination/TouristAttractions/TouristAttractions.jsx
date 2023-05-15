@@ -2,6 +2,7 @@ import Slider from './Slider';
 import { Link } from 'react-router-dom'
 
 const TouristAttractions = () => {
+    
 
   return (
     <div className='flex-col lg:flex-row gap-4 md:flex border-y-2 border-black py-8'>
@@ -12,7 +13,7 @@ const TouristAttractions = () => {
           <Link to='map'>See All</Link>
         </h5>
       </div>
-      <div className='basis-4/5 flex w-[40%]'>
+      <div className='basis-4/5 flex w-full'>
         <Slider />
       </div>
     </div>

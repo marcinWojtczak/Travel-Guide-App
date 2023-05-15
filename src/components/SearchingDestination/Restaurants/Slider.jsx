@@ -1,18 +1,19 @@
-import React, {useContext} from 'react';
-import { TravelLocationsContext } from '../../../App';
+import React, {useContext, useState} from 'react';
 import { useGetRestaurantsQuery } from '../../../services/travelAdvisor';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { BoundsContext } from '../../../App';
 
 const Slider = () => {
 
-  const {locationsData, locationDataId} = useContext(TravelLocationsContext)
-  const name = locationsData?.data?.[0]?.result_object?.name
+  const { bounds } = useContext(BoundsContext)
 
-  //fetching data by location id
-  const { data: restaurantsData, isFetching: restaurantsIsFetching, error: restaurantsError } = useGetRestaurantsQuery(locationDataId)
+  const { data: restaurantsData, isLoading } = useGetRestaurantsQuery(bounds)
+
+  if(isLoading) return <h4>Loading...</h4>
+  
   
 return (
   <>
@@ -28,7 +29,7 @@ return (
       pagination={{ el:'.swiper-pagination', clickable: true }}
     >
       {restaurantsData?.data
-      ?.filter((restaurant) => restaurant?.address_obj?.city === name )
+      ?.filter((restaurant) => restaurant.ranking_position )
       .slice(0, 10)
       .sort((a, b) => a.ranking_position - b.ranking_position)
       .map((restaurant, index) => (

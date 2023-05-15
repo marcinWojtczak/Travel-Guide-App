@@ -1,19 +1,19 @@
-import React, {useContext} from 'react';
-import { TravelLocationsContext } from '../../../App'
-import { useGetTravelAttractionsQuery } from '../../../services/travelAdvisor';
+import React, {useContext, useState} from 'react';
+import { useGetAttractionsQuery } from '../../../services/travelAdvisor';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { BoundsContext } from '../../../App';
 
-const Slider = ({}) => {
 
-  const {locationsData, locationDataId} = useContext(TravelLocationsContext)
-  const name = locationsData?.data?.[0]?.result_object?.name
+const Slider = () => {
 
-  //fetching data by location id
-  const { data: attractionsData, isFetching: attractionsIsFetching, error: attractionsError } = useGetTravelAttractionsQuery(locationDataId)
-
+  const { bounds } = useContext(BoundsContext)
+  const { data: attractionsData, isLoading } = useGetAttractionsQuery(bounds);
+  
+  if(isLoading) return <h4>Loading...</h4>
+  
 return (
   <>
     <Swiper
@@ -28,7 +28,7 @@ return (
       pagination={{ el:'.swiper-pagination', clickable: true }}
     >
       {attractionsData?.data
-        ?.filter((attraction) => attraction?.address_obj?.city === name )
+        ?.filter((attraction) => attraction.ranking_position)
         .slice(0, 10)
         .sort((a, b) => a.ranking_position - b.ranking_position)
         .map((attraction, index) => (
