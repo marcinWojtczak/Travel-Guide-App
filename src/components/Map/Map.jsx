@@ -13,15 +13,19 @@
     const { places, setPlaces } = useContext(PlacesContext)
     console.log({places})
     console.log({bounds})
-    
-  
-    const [type, setType] = useState('restaurants');
-    console.log({type})
-    const [rating, setRating] = useState('');
 
-    const { data: placesInBoundary } = useGetPlacesInBoundaryQuery();
-    console.log(placesInBoundary)
     
+    const [type, setType] = useState('restaurants');
+    const [rating, setRating] = useState('');
+    
+
+    const { data: placesInBoundary, isLoading } = useGetPlacesInBoundaryQuery({type, bounds});
+    
+    useEffect(() => {
+      if(bounds) {
+        setPlaces(placesInBoundary)
+      }
+    }, [bounds, coordinates, ])
 
     const setIcon = () => {
       switch(type) {
@@ -34,21 +38,9 @@
       }
     }
 
-  // useEffect(() => {
-  //   if(placesInBoundary) {
-  //   setPlaces(placesInBoundary.data)
-  //   }
-  // }, [placesInBoundary])
-  
-  // useEffect(() => {
-  //   setPlaces(placesInBoundary?.data)
-  // }, [bounds, coordinates])
-  
-  
-
   return (
       <div className='w-full h-screen flex max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4 relative'>
-        <div className='w-[30vw] h-screen absolute left-0 top-0 max-lg:w-full z-10 bg-white'>
+        <div className='w-[30vw] h-screen absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
           <PlacesList  type={type} setType={setType} placesInBoundary={placesInBoundary}/>
         </div>
         <div className='w-full h-screen max-lg:w-full absolute left-0 top-0'>
@@ -62,7 +54,7 @@
             onChange={(e) => {
               console.log(e)
               setCoordinates({ lat: e.center.lat, lng: e.center.lng });
-              setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
+              setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw});
             }}
             onChildClick={(child) => setChildClicked(child)}
           >

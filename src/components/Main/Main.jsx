@@ -10,9 +10,8 @@ const Main = ({ coord }) => {
 
   const { coordinates, setCoordinates } = useContext(CoordinatesContext)
   const { bounds, setBounds } = useContext(BoundsContext)
-  console.log(coordinates)
+  console.log({bounds})
   const { places, setPlaces } = useContext(PlacesContext)
-  console.log(places)
   const [autocomplete, setAutocomplete] = useState(null)
   const onLoad = (autoC) => setAutocomplete(autoC)
 
@@ -45,7 +44,7 @@ const Main = ({ coord }) => {
           <h1 className='font-bold w-content tracking-wider mb-6'>Explore the World with Us - Your Ultimate Travel Guide</h1>
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged} >
             <form  onSubmit={handleSubmit}>
-            <input className='w-full h-16 border-0 outline-none rounded-3xl pl-8 text-[black]   'placeholder='Search destination'
+            <input className='w-full h-16 border-0 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
             type='text'
             name='destination'
         

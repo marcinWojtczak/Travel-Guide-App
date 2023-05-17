@@ -23,9 +23,10 @@ export const travelApi = createApi({
       query: (bounds) => createRequest(`/restaurants/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
     }),
     getPlacesInBoundary: builder.query({
-      query: (type, bounds) => createRequest(`/${type}/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
+      query: ({type, bounds}) => createRequest(`/${type}/list-in-boundary?bl_latitude=${bounds.sw.lat}&tr_latitude=${bounds.ne.lat}&bl_longitude=${bounds.sw.lng}&tr_longitude=${bounds.ne.lng}`)
+      
     }),
-  })  
+  })
 })
 
 export const {useGetAttractionsQuery, useGetHotelsQuery, useGetRestaurantsQuery, useGetPlacesInBoundaryQuery} = travelApi
