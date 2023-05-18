@@ -5,14 +5,20 @@ import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { BoundsContext } from '../../../App';
+import PlaceDataContext from '../../../context/PlaceDataContext';
 
 
 const Slider = () => {
 
-  const { bounds } = useContext(BoundsContext)
-  const { data: attractionsData, isLoading } = useGetAttractionsQuery(bounds);
+  const { bounds } = useContext(PlaceDataContext)
+
+  const { data: attractionsData, isLoading, isError, error } = useGetAttractionsQuery(bounds);
   
-  if(isLoading) return <h4>Loading...</h4>
+  if(isLoading) {
+    return <h4>Loading...</h4>
+  } else if(isError) {
+    return <h4>{error.message}</h4>
+  }
   
 return (
   <>

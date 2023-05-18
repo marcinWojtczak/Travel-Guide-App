@@ -1,27 +1,16 @@
-import React, { useState, useEffect, createContext} from 'react';
+import React, { useEffect, useContext} from 'react';
 import Main from "./components/Main/Main";
 import Navbar from './components/Navbar/Navbar';
 import Map from './components/Map/Map';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
 import {Route, Routes } from 'react-router-dom';
-import { useGetPlacesInBoundaryQuery  } from './services/travelAdvisor'
-
-export const CoordinatesContext = createContext()
-export const ChildClickedContext = createContext()
-export const BoundsContext = createContext()
-export const PlacesContext = createContext()
+import PlaceDataContext from './context/PlaceDataContext'
 
 
 function App() {
   
-  const [coordinates, setCoordinates] = useState({})
-  const [bounds, setBounds] = useState(null)
-  console.log({bounds})
+  const { setBounds, setCoordinates } = useContext(PlaceDataContext)
 
-  const [childClicked, setChildClicked] = useState(null);
-  const [places, setPlaces] = useState([]);
-  
-  
   useEffect(() => {
     // Set coordinates to be coordinates of the user location
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -34,30 +23,24 @@ function App() {
   },[])
 
   return (
-    <CoordinatesContext.Provider value={{ coordinates, setCoordinates }}>
-      <ChildClickedContext.Provider value={{childClicked, setChildClicked}}>
-        <BoundsContext.Provider value={{bounds, setBounds}}>
-        <PlacesContext.Provider value={{places, setPlaces}}>
-          <Navbar />
-          <Routes>
-            <Route 
-              path='/' 
-              element={
-              <>
-                <Main />
-                <SearchingDestination />
-              </>
-            }>
-            </Route>
-            <Route 
-              path='/map' 
-              element={<Map />}>
-            </Route>
-          </Routes>
-        </PlacesContext.Provider >
-        </BoundsContext.Provider >
-      </ChildClickedContext.Provider>
-    </CoordinatesContext.Provider>
+    <>
+      <Navbar />
+      <Routes>
+        <Route 
+          path='/' 
+          element={
+          <>
+            <Main />
+            <SearchingDestination />
+          </>
+        }>
+        </Route>
+        <Route 
+          path='/map' 
+          element={<Map />}>
+        </Route>
+      </Routes>
+    </>
   );
 }
 

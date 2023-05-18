@@ -4,11 +4,12 @@ import Restaurants  from './Restaurants/Restaurants';
 import Hotels  from './Hotels/Hotels';
 import { CoordinatesContext } from '../../App';
 import { useGetPlaceNameQuery } from '../../services/googleMap';
+import PlaceDataContext from '../../context/PlaceDataContext';
 
 
 const SearchingDestination = () => {
 
-  const { coordinates} = useContext(CoordinatesContext)
+  const { coordinates } = useContext(PlaceDataContext)
 
   //get place address by coordinates
   const { data } = useGetPlaceNameQuery(coordinates)

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { GoLocation } from 'react-icons/go';
-import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';
-import { TravelLocationsContext } from '../../App';
+import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';npm
+import PlaceDataContext from '../../context/PlaceDataContext';
 
 
-const Weather = ({  coordinates }) => {
-  const data = useContext(TravelLocationsContext)
+const Weather = () => {
+  const { data } = useContext(PlaceDataContext)
   const [date, setDate] = useState(new Date())
 
   useEffect(() => {

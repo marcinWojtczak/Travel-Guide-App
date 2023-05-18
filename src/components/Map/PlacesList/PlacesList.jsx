@@ -1,17 +1,19 @@
 import React, {useState, useEffect, createRef, useContext} from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import { ChildClickedContext } from '../../../App';
+import PlaceDataContext from '../../../context/PlaceDataContext';
 
 
-const PlacesList = ({type, setType, placesInBoundary}) => {
-  const { childClicked } = useContext(ChildClickedContext)
+const PlacesList = ({type, setType, places, rating, setRating}) => {
+  
+  const { childClicked } = useContext(PlaceDataContext)
   //all references
   const [elRefs, setElRefs] = useState([]);
-  const [rating, setRating] = useState('');
+  
 
   useEffect(() => {
-    setElRefs((refs) => Array(placesInBoundary?.data?.length).fill().map((_, index) => refs[index] || createRef()));
-  }, [placesInBoundary?.data]);
+    setElRefs((refs) => Array(places?.length).fill().map((_, index) => refs[index] || createRef()));
+  }, [places]);
 
   return (
     <div className='h-full flex flex-col justify-center items-center '>
@@ -35,7 +37,7 @@ const PlacesList = ({type, setType, placesInBoundary}) => {
         </div>
       </div>
       <div className='flex flex-col gap-6 h-[80%] w-full overflow-x-auto items-center'>
-        {placesInBoundary?.data?.map((place, index) => (
+        {places?.map((place, index) => (
         <div key={index} ref={elRefs[index]} className='border-t border-b border-zinc-400 w-[90%] ' >
           <PlaceDetails 
             place={place} 

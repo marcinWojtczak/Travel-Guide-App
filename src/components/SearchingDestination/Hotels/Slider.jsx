@@ -1,18 +1,22 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import { useGetHotelsQuery } from '../../../services/travelAdvisor';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { BoundsContext } from '../../../App';
+import PlaceDataContext from '../../../context/PlaceDataContext'
 
 const Slider = () => {
   
-  const {bounds} = useContext(BoundsContext)
+  const { bounds } = useContext(PlaceDataContext)
 
-  const { data: hotelsData, isLoading } = useGetHotelsQuery(bounds);
+  const { data: hotelsData, isLoading, isError, error } = useGetHotelsQuery(bounds);
 
-  if(isLoading) return <h4>Loading...</h4>
+  if(isLoading) {
+    return <h4>Loading...</h4>
+  } else if(isError) {
+    return <h4>{error.message}</h4>
+  }
   
   return (
     <>

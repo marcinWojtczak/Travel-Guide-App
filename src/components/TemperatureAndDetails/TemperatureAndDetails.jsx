@@ -1,18 +1,17 @@
-import React, {useEffect, useState, useContext } from 'react';
-import { BsThermometerHalf, BsWind, BsDroplet, BsSunFill } from 'react-icons/bs';
+import React, { useContext } from 'react';
+import { BsThermometerHalf, BsWind, BsDroplet, } from 'react-icons/bs';
 import weather from '../../assets/icons/01d.png'
 import { useGetWeatherQuery } from '../../services/openWeather';
-import { CoordinatesContext } from '../../App';
+import PlaceDataContext from '../../context/PlaceDataContext';
 
 const TemperatureAndDetails = () => {
-  const coordinates = useContext(CoordinatesContext)
+  const { coordinates } = useContext(PlaceDataContext)
   
   const { data, isLoading, error } = useGetWeatherQuery(coordinates)
-  console.log(data)
-  
-
   const weatherData = data?.weather[0]
   const weatherMain = data?.main
+
+  if(isLoading) return <h4>Loading...</h4>
   
   return (
     <>

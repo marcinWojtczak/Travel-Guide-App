@@ -1,31 +1,35 @@
-  import React, { useState, useContext, useEffect, createContext } from 'react';
+  import React, { useState, useContext, useEffect } from 'react';
   import GoogleMapReact from 'google-map-react';
   import PlacesList from './PlacesList/PlacesList';
   import { MdHotel, MdRestaurant, MdPhotoCamera, } from 'react-icons/md'
   import { useGetPlacesInBoundaryQuery } from '../../services/travelAdvisor'
-  import { CoordinatesContext, ChildClickedContext, BoundsContext, PlacesContext } from '../../App';
+  import PlaceDataContext from '../../context/PlaceDataContext';
 
   const Map = () => {
 
-    const { coordinates, setCoordinates } = useContext(CoordinatesContext)
-    const { bounds, setBounds } = useContext(BoundsContext)
-    const { childClicked, setChildClicked } = useContext(ChildClickedContext)
-    const { places, setPlaces } = useContext(PlacesContext)
-    console.log({places})
-    console.log({bounds})
+    const [filteredPlaces, setFilteredPlaces] = useState([])
 
+    const { coordinates, setCoordinates, bounds, setBounds, setChildClicked, setPlaces } = useContext(PlaceDataContext)
     
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
     
-
     const { data: placesInBoundary, isLoading } = useGetPlacesInBoundaryQuery({type, bounds});
+    const placesData = placesInBoundary?.data
+    
+    const places = filteredPlaces?.length ? filteredPlaces : placesData
+
+    useEffect(() => {
+      const filteredPlaces = places?.filter((place) => place.rating > rating)
+      setFilteredPlaces(filteredPlaces)
+    }, [rating])
     
     useEffect(() => {
       if(bounds) {
         setPlaces(placesInBoundary)
+        setFilteredPlaces([])
       }
-    }, [bounds, coordinates, ])
+    }, [bounds, coordinates, type])
 
     const setIcon = () => {
       switch(type) {
@@ -41,7 +45,13 @@
   return (
       <div className='w-full h-screen flex max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4 relative'>
         <div className='w-[30vw] h-screen absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
-          <PlacesList  type={type} setType={setType} placesInBoundary={placesInBoundary}/>
+          <PlacesList  
+            type={type} 
+            setType={setType} 
+            places={filteredPlaces?.length ? filteredPlaces : places}
+            setRating={setRating}
+            rating={rating}
+          />
         </div>
         <div className='w-full h-screen max-lg:w-full absolute left-0 top-0'>
           {coordinates && <GoogleMapReact
@@ -52,13 +62,12 @@
             margin={[50, 50, 50, 50]}
             options={''}
             onChange={(e) => {
-              console.log(e)
               setCoordinates({ lat: e.center.lat, lng: e.center.lng });
               setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw});
             }}
             onChildClick={(child) => setChildClicked(child)}
           >
-            {placesInBoundary?.data?.map((place, index) => (
+            {places?.map((place, index) => (
               <div 
                 className='flex flex-col items-center cursor-pointer z-30'
                 lat={(place.latitude)}

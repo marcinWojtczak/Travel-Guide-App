@@ -1,20 +1,13 @@
-import React, { useRef, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { sanFrancisco,  } from '../../assets/index';
 import {Autocomplete} from '@react-google-maps/api';
-import { CoordinatesContext, PlacesContext, BoundsContext } from '../../App';
+import PlaceDataContext from '../../context/PlaceDataContext'
 
+const Main = () => {
 
-
-
-const Main = ({ coord }) => {
-
-  const { coordinates, setCoordinates } = useContext(CoordinatesContext)
-  const { bounds, setBounds } = useContext(BoundsContext)
-  console.log({bounds})
-  const { places, setPlaces } = useContext(PlacesContext)
+  const { setCoordinates, setBounds, setPlaces  } = useContext(PlaceDataContext)
   const [autocomplete, setAutocomplete] = useState(null)
   const onLoad = (autoC) => setAutocomplete(autoC)
-
 
   const onPlaceChanged = () => {
     const newPlaces = autocomplete.getPlace();
@@ -42,12 +35,14 @@ const Main = ({ coord }) => {
       <div style={{backgroundImage: `url(${sanFrancisco})` }} className='bg-center bg-cover w-full h-screen flex flex-col justify-center items-center'>
         <div className='w-2/3 text-center'>
           <h1 className='font-bold w-content tracking-wider mb-6'>Explore the World with Us - Your Ultimate Travel Guide</h1>
-          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged} >
+          <Autocomplete 
+            onLoad={onLoad} 
+            onPlaceChanged={onPlaceChanged}  
+            types={['(cities)', '(regions)', '(countries)']}>
             <form  onSubmit={handleSubmit}>
             <input className='w-full h-16 border-0 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
             type='text'
             name='destination'
-        
             >
             </input>
             <button type='submit'></button>
