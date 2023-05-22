@@ -7,29 +7,31 @@
 
   const Map = () => {
 
-    const [filteredPlaces, setFilteredPlaces] = useState([])
-
     const { coordinates, setCoordinates, bounds, setBounds, setChildClicked, setPlaces } = useContext(PlaceDataContext)
     
+    const [filteredPlaces, setFilteredPlaces] = useState([])
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
+    console.log({rating})
+    console.log({filteredPlaces})
     
-    const { data: placesInBoundary, isLoading } = useGetPlacesInBoundaryQuery({type, bounds});
-    const placesData = placesInBoundary?.data
-    
-    const places = filteredPlaces?.length ? filteredPlaces : placesData
+    const { data: placesInBoundary } = useGetPlacesInBoundaryQuery({type, bounds});
+    const placesData = placesInBoundary?.data.filter((place) => place.name && place.num_reviews > 0)
 
+    
+
+    //filter by rating
     useEffect(() => {
-      const filteredPlaces = places?.filter((place) => place.rating > rating)
+      const filteredPlaces = placesData?.filter((place) => place.rating > rating)
       setFilteredPlaces(filteredPlaces)
-    }, [rating])
+    }, [rating, placesData])
     
     useEffect(() => {
       if(bounds) {
-        setPlaces(placesInBoundary)
+        setPlaces(placesData)
         setFilteredPlaces([])
       }
-    }, [bounds, coordinates, type])
+    }, [bounds, type])
 
     const setIcon = () => {
       switch(type) {
@@ -39,6 +41,7 @@
           return <MdPhotoCamera size={'19px'} style={{color: 'white'}}/>;
         case 'hotels':
           return <MdHotel size={'19px'} style={{color: 'white'}}/>;
+        default:
       }
     }
 
@@ -48,7 +51,7 @@
           <PlacesList  
             type={type} 
             setType={setType} 
-            places={filteredPlaces?.length ? filteredPlaces : places}
+            places={filteredPlaces?.length ? filteredPlaces : placesData}
             setRating={setRating}
             rating={rating}
           />
@@ -67,8 +70,22 @@
             }}
             onChildClick={(child) => setChildClicked(child)}
           >
-            {places?.map((place, index) => (
+            {filteredPlaces?.length 
+              ? filteredPlaces.map((place, index) =>
               <div 
+                className='flex flex-col items-center cursor-pointer z-30'
+                lat={(place.latitude)}
+                lng={(place.longitude)}
+                key={index}
+              >
+                <div className='p-2 bg-[red] rounded-[50%] hover:p-3'>
+                  {setIcon()}
+                </div>
+                <p className='font-semibold'>{place.name}</p>
+              </div>
+              )
+              : placesData?.map((place, index) => (
+                <div 
                 className='flex flex-col items-center cursor-pointer z-30'
                 lat={(place.latitude)}
                 lng={(place.longitude)}

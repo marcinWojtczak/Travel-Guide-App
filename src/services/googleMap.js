@@ -1,6 +1,6 @@
 import { fetchBaseQuery, createApi } from '@reduxjs/toolkit/query/react';
 
-const googleApiKey = 'AIzaSyC9gBgsOK526RiisjBBOpCvXmslolP6_4Y'
+const googleApiKey = process.env.REACT_APP_GOOGLE_MAP_KEY
 
 
 export const googleMapApi = createApi({

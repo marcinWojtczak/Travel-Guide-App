@@ -29,7 +29,7 @@ const PlaceDetails = ({selected, refProp, place }) => {
             <p>{place.num_reviews} reviews</p>
           </div>
           <div className='basis-[40%]'>
-            <img src={place?.photo ? place.photo.images?.large?.url : ''} className='rounded-lg '/>
+            <img src={place?.photo ? place.photo.images?.large?.url : ''} className='rounded-lg' alt='img'/>
           </div>
         </div>
         <div className='flex justify-between'>
@@ -48,8 +48,8 @@ const PlaceDetails = ({selected, refProp, place }) => {
           ))}
         </div>
         <div className='flex items-center'>
-          <a className='underline underline-offset-2 mr-10 text-blue-900' target='_blank' href={place?.web_url}><BsGlobe className='inline mr-1 '/>Trip Advisor Website</a>
-          <a className='underline underline-offset-2 text-blue-900' target='_blank' href={place?.website}> Website</a>
+          <a className='underline underline-offset-2 mr-10 text-blue-900' target='_blank' rel="noreferrer" href={place?.web_url}><BsGlobe className='inline mr-1 '/>Trip Advisor Website</a>
+          <a className='underline underline-offset-2 text-blue-900' target='_blank' rel="noreferrer" href={place?.website}> Website</a>
         </div>
       </div>  
     </div>

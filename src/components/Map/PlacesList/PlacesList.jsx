@@ -1,7 +1,7 @@
 import React, {useState, useEffect, createRef, useContext} from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
-import { ChildClickedContext } from '../../../App';
 import PlaceDataContext from '../../../context/PlaceDataContext';
+
 
 
 const PlacesList = ({type, setType, places, rating, setRating}) => {
@@ -29,7 +29,7 @@ const PlacesList = ({type, setType, places, rating, setRating}) => {
           </select>
           
           <select value={rating} onChange={(e) => setRating(e.target.value)} className='border-2 rounded-lg inline px-2 py-1 drop-shadow-lg outline-0'>
-            <option value={0}>All</option>
+            <option value={null}>All</option>
             <option value={3}>Above 3.0</option>
             <option value={4}>Above 4.0</option>
             <option value={4.5}>Above 4.5</option>
@@ -41,7 +41,7 @@ const PlacesList = ({type, setType, places, rating, setRating}) => {
         <div key={index} ref={elRefs[index]} className='border-t border-b border-zinc-400 w-[90%] ' >
           <PlaceDetails 
             place={place} 
-            selected={Number(childClicked) == index} 
+            selected={Number(childClicked) === index} 
             refProp={elRefs[index]}/>
         </div>
         ))}

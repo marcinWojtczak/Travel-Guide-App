@@ -20,7 +20,7 @@ function App() {
       const ne = { lat: coords.latitude + 0.1, lng: coords.longitude + 0.1 };
       setBounds({ ne, sw })
     })
-  },[])
+  },[setBounds, setCoordinates])
 
   return (
     <>

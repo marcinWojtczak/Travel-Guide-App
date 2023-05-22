@@ -1,10 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import { useGetRestaurantsQuery } from '../../../services/travelAdvisor';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { BoundsContext } from '../../../App';
 import PlaceDataContext from '../../../context/PlaceDataContext';
 
 const Slider = () => {

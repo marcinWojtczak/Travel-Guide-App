@@ -38,14 +38,18 @@ const Main = () => {
           <Autocomplete 
             onLoad={onLoad} 
             onPlaceChanged={onPlaceChanged}  
-            types={['(cities)', '(regions)', '(countries)']}>
+            options={{
+              types: ["(regions)"]
+            }}
+          >
             <form  onSubmit={handleSubmit}>
-            <input className='w-full h-16 border-0 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
-            type='text'
-            name='destination'
-            >
-            </input>
-            <button type='submit'></button>
+              <input 
+                className='w-full h-16 border-0 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
+                type='text'
+                name='destination'
+                >
+              </input>
+              <button type='submit'></button>
           </form>
           </Autocomplete>
         </div>

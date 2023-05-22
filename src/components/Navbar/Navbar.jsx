@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
-import { SiYourtraveldottv, SiInstagram, SiFacebook} from "react-icons/si"
-import { RiCloseLine, RiMenuFill } from "react-icons/ri"
+import { SiYourtraveldottv } from "react-icons/si"
 
 
 const Navbar = () => {

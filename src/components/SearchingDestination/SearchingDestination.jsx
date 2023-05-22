@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import TouristAttractions  from './TouristAttractions/TouristAttractions';
 import Restaurants  from './Restaurants/Restaurants';
 import Hotels  from './Hotels/Hotels';
-import { CoordinatesContext } from '../../App';
 import { useGetPlaceNameQuery } from '../../services/googleMap';
 import PlaceDataContext from '../../context/PlaceDataContext';
 
