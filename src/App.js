@@ -31,7 +31,7 @@ function App() {
           element={
           <>
             <Main />
-            <SearchingDestination />
+            {/* <SearchingDestination /> */}
           </>
         }>
         </Route>

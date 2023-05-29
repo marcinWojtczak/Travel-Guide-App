@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { sanFrancisco,  } from '../../assets/index';
+import { travel } from '../../assets/index';
 import {Autocomplete} from '@react-google-maps/api';
 import PlaceDataContext from '../../context/PlaceDataContext'
 
@@ -32,9 +32,9 @@ const Main = () => {
 
   return (
     <>
-      <div style={{backgroundImage: `url(${sanFrancisco})` }} className='bg-center bg-cover w-full h-screen flex flex-col justify-center items-center'>
+      <div style={{backgroundImage: `url(${travel})` }} className='bg-center bg-cover w-full h-[60vh] md:h-[80vh] flex flex-col justify-center items-center py-12'>
         <div className='w-2/3 text-center'>
-          <h1 className='font-bold w-content tracking-wider mb-6'>Explore the World with Us - Your Ultimate Travel Guide</h1>
+          <h1 className='font-bold w-content tracking-wider mb-6 md:font-[42px]'>Explore the World with Us - Your Ultimate Travel Guide</h1>
           <Autocomplete 
             onLoad={onLoad} 
             onPlaceChanged={onPlaceChanged}  
@@ -44,7 +44,7 @@ const Main = () => {
           >
             <form  onSubmit={handleSubmit}>
               <input 
-                className='w-full h-16 border-0 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
+                className='w-full h-12 outline-none rounded-lg pl-8 text-[black]   'placeholder='Search destination'
                 type='text'
                 name='destination'
                 >
