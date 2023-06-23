@@ -24,7 +24,6 @@ const TemperatureAndDetails = () => {
                   <img 
                     src={require(`../../assets/icons/${weatherData.icon}.png`)} alt='weather icon'
                     width='40'
-                    // className='w-[110px] md:w-[70px]'
                   />
                   <div className='flex'>
                     <span className='text-[25px] md:text-[25px]'>{Math.floor(weatherMain?.temp)}</span>

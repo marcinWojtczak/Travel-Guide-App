@@ -11,7 +11,6 @@ const PlacesList = ({type, setType, places, rating, setRating}) => {
   //all references
   const [elRefs, setElRefs] = useState([]);
   
-
   useEffect(() => {
     setElRefs((refs) => Array(places?.length).fill().map((_, index) => refs[index] || createRef()));
   }, [places]);

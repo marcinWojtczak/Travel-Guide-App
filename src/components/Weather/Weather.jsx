@@ -7,8 +7,7 @@ import PlaceDataContext from '../../context/PlaceDataContext';
 const Weather = () => {
   const { data } = useContext(PlaceDataContext)
   const [date, setDate] = useState(new Date())
-  // console.log(data)
-
+  
   const placeData = data?.plus_code?.compound_code
   const placeName = placeData?.split(' ')[1]
 

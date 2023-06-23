@@ -12,13 +12,9 @@
     const [filteredPlaces, setFilteredPlaces] = useState([])
     const [type, setType] = useState('restaurants');
     const [rating, setRating] = useState('');
-    console.log({rating})
-    console.log({filteredPlaces})
     
     const { data: placesInBoundary } = useGetPlacesInBoundaryQuery({type, bounds});
     const placesData = placesInBoundary?.data.filter((place) => place.name && place.num_reviews > 0)
-
-    
 
     //filter by rating
     useEffect(() => {
@@ -47,7 +43,7 @@
 
   return (
       <div className='w-full h-screen flex max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4 relative'>
-        <div className='w-[30vw] h-screen border  absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
+        <div className='w-[30vw] h-screen border absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
           <PlacesList  
             type={type} 
             setType={setType} 
