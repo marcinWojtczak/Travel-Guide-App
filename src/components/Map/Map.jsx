@@ -24,14 +24,14 @@
     useEffect(() => {
       const filteredPlaces = placesData?.filter((place) => place.rating > rating)
       setFilteredPlaces(filteredPlaces)
-    }, [rating, placesData])
+    }, [rating])
     
     useEffect(() => {
       if(bounds) {
         setPlaces(placesData)
         setFilteredPlaces([])
       }
-    }, [bounds, type])
+    }, [bounds, type, bounds])
 
     const setIcon = () => {
       switch(type) {
@@ -47,7 +47,7 @@
 
   return (
       <div className='w-full h-screen flex max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4 relative'>
-        <div className='w-[30vw] h-screen absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
+        <div className='w-[30vw] h-screen border  absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
           <PlacesList  
             type={type} 
             setType={setType} 

@@ -15,3 +15,4 @@ export const store = configureStore({
     getDefaultMiddleware().concat(travelApi.middleware, weatherApi.middleware, googleMapApi.middleware),
 });
 
+

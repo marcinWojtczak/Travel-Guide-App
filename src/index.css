@@ -12,6 +12,16 @@ html, body {
   box-sizing: border-box;
 }
 
+@layer components {
+  .swiper-button-next {
+    @apply rounded-sm bg-white py-8 px-4 font-extrabold
+  }
+
+  .swiper-button-prev {
+    @apply rounded-sm bg-white py-8 px-4 font-extrabold
+  }
+}
+
 @layer base {
   h1 {
     @apply text-4xl lg:text-6xl  
@@ -34,10 +44,11 @@ html, body {
   }
 
   p {
-    @apply text-[14px] sm:text-[16px]
+    @apply text-[14px]
   }
 
   li {
     @apply cursor-pointer list-none text-[18px] sm:text-[20px]
   }
+
 }

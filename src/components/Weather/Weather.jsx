@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { GoLocation } from 'react-icons/go';
-import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';npm
+import TemperatureAndDetails from '../TemperatureAndDetails/TemperatureAndDetails';
 import PlaceDataContext from '../../context/PlaceDataContext';
 
 
 const Weather = () => {
   const { data } = useContext(PlaceDataContext)
   const [date, setDate] = useState(new Date())
+  // console.log(data)
+
+  const placeData = data?.plus_code?.compound_code
+  const placeName = placeData?.split(' ')[1]
 
   useEffect(() => {
     setInterval(() => {
@@ -16,18 +20,18 @@ const Weather = () => {
   }, [])
 
   return (
-    <div className='flex w-full  bg-sky-600 text-[white] gap-8 h-full justify-evenly p-0 md:p-4 lg:p-8 xl:p-12'>
-      <div className='flex flex-col font-extralight tracking-wide gap-4'>
-        <p className='text-lg md:text-base'>{date.toLocaleString()}</p>
-        <div className='flex  gap-1'>
+    <div className='w-full bg-sky-600 text-[white] gap-4 h-full p-4 sm:p-6 drop-shadow-lg'>
+      <div className='flex flex-col sm:flex-row items-center justify-between font-extralight tracking-wide gap-4 mb-4'>
+        <div className='flex gap-2 items-center'>
           <GoLocation 
-            size={30}
+            size={20}
             className='w-full md:w-[20px]'
-          />
+          />  
           {data &&
-            <h2 className='md:text-[30px] font-semibold tracking-wide'>{data?.data[0]?.result_object.name}</h2>
+            <h4 className='md:text-[30px] font-semibold tracking-wide'>{placeName}</h4>
           }
         </div>
+        <p className='text-lg md:text-base'>{date.toLocaleString()}</p>
       </div>
       <TemperatureAndDetails />
     </div>
