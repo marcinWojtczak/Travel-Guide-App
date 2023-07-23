@@ -40,7 +40,7 @@ const Input = () => {
     >
       <form  onSubmit={handleSubmit}>
         <input 
-          className='w-full border-2 h-10 md:h-12 outline-none rounded-lg pl-4 text-[black] shadow-lg'
+          className='w-full border-2 h-8 md:h-12 outline-none rounded-lg pl-4 text-[black] shadow-lg'
           placeholder='Search destination'
           type='text'
           name='destination'

@@ -1,10 +1,11 @@
 import React, { useEffect, useContext} from 'react';
+import {Route, Routes } from 'react-router-dom';
+import PlaceDataContext from './context/PlaceDataContext';
+import Layout from './components/Layout/Layout';
 import Main from "./components/Main/Main";
-import Navbar from './components/Navbar/Navbar';
 import Map from './components/Map/Map';
 import SearchingDestination from './components/SearchingDestination/SearchingDestination';
-import {Route, Routes } from 'react-router-dom';
-import PlaceDataContext from './context/PlaceDataContext'
+import Weather from './components/Weather/Weather';
 
 
 function App() {
@@ -24,21 +25,17 @@ function App() {
 
   return (
     <>
-      <Navbar />
       <Routes>
-        <Route 
-          path='/' 
-          element={
-          <>
-            <Main />
-            <SearchingDestination />
-          </>
-        }>
+        <Route  path='/' element={<Layout />}>
+          <Route  index element={
+            <>
+              <Main />
+              <Weather />
+              <SearchingDestination />
+            </>
+          } />
         </Route>
-        <Route 
-          path='/map' 
-          element={<Map />}>
-        </Route>
+        <Route  path='map' element={<Map />} />
       </Routes>
     </>
   );

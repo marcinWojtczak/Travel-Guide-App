@@ -1,7 +1,9 @@
 import React, {useState, useEffect, createRef, useContext} from 'react';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceDataContext from '../../../context/PlaceDataContext';
-import Input from '../../Input/Input'
+import Input from '../../Input/Input';
+import { SiYourtraveldottv } from "react-icons/si";
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,7 +18,13 @@ const PlacesList = ({type, setType, places, rating, setRating}) => {
   }, [places]);
 
   return (
-    <div className='h-full flex flex-col justify-center items-center mt-4'>
+    <div className='h-full flex flex-col justify-center items-center mt-2'>
+      <Link to='/'>
+        <div className='flex justify-center items-center cursor-pointer gap-2 p-2'>
+          <h3><SiYourtraveldottv /></h3>
+          <h3 className='font-bold'>Travel Places</h3>
+        </div>
+      </Link>
       <div className='mx-4 w-[90%] flex flex-col items-start justify-between gap-2'>
         <h4 className='font-bold'>Attractions, Hotel, Restaurants around you</h4>
         <Input />

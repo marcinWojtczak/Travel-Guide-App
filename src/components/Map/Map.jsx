@@ -5,6 +5,7 @@
   import { useGetPlacesInBoundaryQuery } from '../../services/travelAdvisor'
   import PlaceDataContext from '../../context/PlaceDataContext';
 
+
   const Map = () => {
 
     const { coordinates, setCoordinates, bounds, setBounds, setChildClicked, setPlaces } = useContext(PlaceDataContext)
@@ -44,6 +45,8 @@
   return (
       <div className='w-full h-screen flex max-lg:flex-col max-lg:h-full max-lg:p-8 max-sm:p-4 relative'>
         <div className='w-[30vw] h-screen border absolute left-0 top-0 max-lg:w-full z-10 bg-white p-0'>
+          <div className="flex justify-center items-center cursor-pointer gap-2 p-4">
+          </div>
           <PlacesList  
             type={type} 
             setType={setType} 

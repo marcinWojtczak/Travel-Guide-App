@@ -19,7 +19,7 @@ const Weather = () => {
   }, [])
 
   return (
-    <div className='w-full bg-sky-600 text-[white] gap-4 h-full p-4 sm:p-6 drop-shadow-lg'>
+    <div className='bg-sky-600 text-[white] gap-4 h-full m-4 p-4 sm:p-6 drop-shadow-lg'>
       <div className='flex flex-col sm:flex-row items-center justify-between font-extralight tracking-wide gap-4 mb-4'>
         <div className='flex gap-2 items-center'>
           <GoLocation 

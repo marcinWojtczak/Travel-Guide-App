@@ -7,7 +7,6 @@ import 'swiper/css/navigation';
 import PlaceDataContext from '../../../context/PlaceDataContext';
 import ReactStarRatings from 'react-star-ratings';
 
-
 const Slider = () => {
 
   const { bounds } = useContext(PlaceDataContext)
