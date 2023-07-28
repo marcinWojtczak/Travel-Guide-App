@@ -12,7 +12,7 @@ const Slider = () => {
   const { bounds } = useContext(PlaceDataContext)
 
   const { data: hotelsData, isLoading, isError, error } = useGetHotelsQuery(bounds);
-  console.log(hotelsData)
+  
 
   if(isLoading) {
     return <h4>Loading...</h4>

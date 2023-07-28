@@ -7,7 +7,6 @@ import PlaceDataContext from '../../context/PlaceDataContext';
 const Weather = () => {
   const { data } = useContext(PlaceDataContext)
   const [date, setDate] = useState(new Date())
-  
   const placeData = data?.plus_code?.compound_code
   const placeName = placeData?.split(' ')[1]
 
@@ -19,7 +18,7 @@ const Weather = () => {
   }, [])
 
   return (
-    <div className='bg-sky-600 text-[white] gap-4 h-full m-4 p-4 sm:p-6 drop-shadow-lg'>
+    <div className='text-[black] gap-4 h-full m-4 p-4 sm:p-6 border-y border-zinc-300'>
       <div className='flex flex-col sm:flex-row items-center justify-between font-extralight tracking-wide gap-4 mb-4'>
         <div className='flex gap-2 items-center'>
           <GoLocation 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const TouristAttractions = () => {
 
   return (
-    <div className='flex-col gap-4 md:flex drop-shadow-lg bg-white p-8'>
+    <div className='flex-col gap-4 md:flex border-y border-zinc-300 p-8'>
       <div className='flex flex-col lg:flex-row gap-4'>
         <div className='basis-3/4 flex flex-col gap-2'>
           <h3 className='font-semibold'>Do</h3>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Hotels = () => {
 
   return (
-    <div className='flex-col gap-4 md:flex drop-shadow-lg bg-white p-8'>
+    <div className='flex-col gap-4 md:flex border-y border-zinc-300 p-8'>
       <div className='basis-1/5 flex flex-col gap-4 md:gap-4'>
         <h3 className='font-semibold'>Stay</h3>
         <h5>A mix of the charming, modern, and tried and true.</h5>

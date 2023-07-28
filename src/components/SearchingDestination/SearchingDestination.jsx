@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import TouristAttractions  from './TouristAttractions/TouristAttractions';
 import Restaurants  from './Restaurants/Restaurants';
 import Hotels  from './Hotels/Hotels';
-import Weather from '../Weather/Weather'
 import { useGetPlaceNameQuery } from '../../services/googleMap';
 import PlaceDataContext from '../../context/PlaceDataContext';
 
@@ -20,9 +19,9 @@ const SearchingDestination = () => {
   
   return (
     <div className='flex flex-col'>
-      <div className='flex flex-col gap-8 p-4 xl:p-16 lg:p-12 md:p-10'>
+      <div className='flex flex-col gap-8 w-full p-4 sm:p-6'>
         <h2 className='font-bold'>Essential {placeName}</h2>
-          <div className='flex flex-col gap-16 drop-shadow-lg'>
+          <div className='flex flex-col gap-16'>
             <TouristAttractions />
             <Hotels />
             <Restaurants />
